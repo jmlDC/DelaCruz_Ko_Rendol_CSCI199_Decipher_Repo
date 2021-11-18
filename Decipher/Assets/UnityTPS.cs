@@ -327,7 +327,7 @@ public class UnityTPS : MonoBehaviour
                         // Debug.Log("This object can provide a quest.");
                     }
 
-                    if (Input.GetKeyDown(KeyCode.E))
+                    if (Input.GetKeyDown(KeyCode.E) && !Cursor.visible)
                     {
                         if (currentGameObject.GetComponent<QuestGiver>() != null)
                         {
