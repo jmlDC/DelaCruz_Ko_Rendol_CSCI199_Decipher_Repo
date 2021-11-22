@@ -29,6 +29,7 @@ public class UnityTPS : MonoBehaviour
     public GameObject designatedBoard;
     public GameObject questUI;
     public GameObject fadeUI;
+    public GameObject smartContractUI;
 
     public GameObject npcTextname;
 
@@ -103,7 +104,11 @@ public class UnityTPS : MonoBehaviour
         pubDesUI.SetActive(false);
         fadeUI.SetActive(false);
         persistentUI.SetActive(false);
+        // smartContractUI.SetActive(false);
         initializeNPCTags();
+
+        float dialogueIndicatorYSize = dialogueIndicator.transform.Find("dialogueBox").GetComponent<RectTransform>().sizeDelta.y;
+        dialogueIndicator.transform.Find("dialogueBox").GetComponent<RectTransform>().sizeDelta = new Vector2(2* Screen.width,dialogueIndicatorYSize);
 
         afterDayDialogueCounter = 0;
         afterDayMaxDialogueCounter = gameObject.GetComponent<dayQuestTracker>().listQuestDays[day - 1].returnAfterDayDialogueArray().Length;
@@ -121,13 +126,14 @@ public class UnityTPS : MonoBehaviour
         checkDayStatus();
         npcNameWTSP();
         updateDay();
+        callSmartContractUI();
+        
     }
 
     void FixedUpdate()
     {
         updateReputation();
-        ;
-
+        
     }
 
     private void movePlayer()
@@ -296,6 +302,8 @@ public class UnityTPS : MonoBehaviour
 
             }
         }
+
+
         bool LULCHECK = false;
         string limaw = "";
         // Debug.Log("Dialogue counter: " + dialogueCounter);
@@ -496,6 +504,14 @@ public class UnityTPS : MonoBehaviour
         catch (Exception e)
         {
             Debug.Log("No length is detected.");
+        }
+    }
+
+    public void callSmartContractUI(){
+        if (Input.GetKey(KeyCode.Q)){
+            smartContractUI.GetComponent<SmartContractUIAnim>().onPress();
+        } else {
+            smartContractUI.GetComponent<SmartContractUIAnim>().onRelease();
         }
     }
 

@@ -11,11 +11,14 @@ public class QuestGiver : MonoBehaviour
 
 
     private GameObject questUI;
+    private GameObject smartContractUI;
 
     [SerializeField]
     public string questTitle;
     [SerializeField]
     public string questDesc;
+
+    private string questLineText;
 
     [SerializeField]
     public string[] startingDialogue;
@@ -47,6 +50,8 @@ public class QuestGiver : MonoBehaviour
     void Start()
     {
         questUI = player.GetComponent<UnityTPS>().questUI;
+        smartContractUI = player.GetComponent<UnityTPS>().smartContractUI;
+
     }
 
 
@@ -79,7 +84,7 @@ public class QuestGiver : MonoBehaviour
             waypointPosition.x = Mathf.Clamp(waypointPosition.x, minX, maxX);
             waypointPosition.y = Mathf.Clamp(waypointPosition.y, minY, maxY);
             // Debug.Log(">>>>>>>>>>: " + Vector3.Distance(designatedMarkerLocation.transform.position, player.transform.position).ToString());
-            string stringifiedDistance = ((int)Vector3.Distance(designatedMarkerLocation.transform.position, player.transform.position)).ToString()+"m";
+            string stringifiedDistance = ((int)Vector3.Distance(designatedMarkerLocation.transform.position, player.transform.position)).ToString() + "m";
             questUI.transform.Find("Marker/Distance").GetComponent<Text>().text = stringifiedDistance;
             questUI.transform.Find("uiDistance").GetComponent<Text>().text = stringifiedDistance;
             player.GetComponent<UnityTPS>().waypointMarker.transform.position = waypointPosition;
@@ -96,6 +101,9 @@ public class QuestGiver : MonoBehaviour
             questUI.SetActive(true);
             questUI.transform.Find("questName").gameObject.GetComponent<Text>().text = questTitle;
             questUI.transform.Find("Quest description/objDesc").gameObject.GetComponent<Text>().text = objectiveList[objectiveCounter].objectiveDesc;
+
+            smartContractUI.transform.Find("QuestTitle").GetComponent<Text>().text = questTitle;
+            smartContractUI.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = questDesc;
             isActive = true;
             player.GetComponent<UnityTPS>().globalQuestTracker = true;
 
@@ -106,11 +114,21 @@ public class QuestGiver : MonoBehaviour
 
 
 
+
             if (dialogueDict.Count == 0)
             {
                 debugCounter++;
                 foreach (var x in objectiveList)
                 {
+
+                    if (x.checkObjectiveState())
+                    {
+                        questLineText += x.objectiveDesc + " (Complete)\n";
+                    }
+                    else
+                    {
+                        questLineText += x.objectiveDesc + "\n";
+                    }
                     // foreach (var x in objective.requiredInteractionObject.GetComponent<Dialogue>().sentences)
                     // {
                     //     Debug.Log(">>>: "+ x + " | " + objective.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName());
@@ -137,13 +155,16 @@ public class QuestGiver : MonoBehaviour
                     gameObject.GetComponent<Dialogue>().sentences = startingDialogue;
                 }
 
+                smartContractUI.transform.Find("Questline").GetComponent<TextMeshProUGUI>().text = questLineText;
+
             }
         }
 
     }
 
     public void updateQuestUI()
-    {
+    {   
+        questLineText = null;
         Debug.Log(objectiveCounter + 1 + " | " + objectiveList.Length);
         if (customDialogueDict.Count != 0)
         {
@@ -158,12 +179,21 @@ public class QuestGiver : MonoBehaviour
 
                 }
 
+                if (t.checkObjectiveState())
+                {
+                    questLineText += t.objectiveDesc + "(Complete)\n";
+                }
+                else
+                {
+                    questLineText += t.objectiveDesc + "\n";
+                }
+
             }
         }
 
 
         if (objectiveCounter + 1 == objectiveList.Length)
-        {
+        {   
             if (parentConvoTrackerState)
             {
                 Debug.Log("Quest is complete!");
@@ -171,6 +201,9 @@ public class QuestGiver : MonoBehaviour
                 setQuestAsComplete();
                 questUI.transform.Find("questName").gameObject.GetComponent<Text>().text = null;
                 questUI.transform.Find("Quest description/objDesc").gameObject.GetComponent<Text>().text = null;
+                smartContractUI.transform.Find("QuestTitle").GetComponent<Text>().text = "No quest active.";
+                smartContractUI.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = null;
+                smartContractUI.transform.Find("Questline").GetComponent<TextMeshProUGUI>().text = "No objectives.";
                 player.GetComponent<UnityTPS>().currentQuest = null;
                 player.GetComponent<UnityTPS>().globalQuestTracker = false;
                 player.GetComponent<UnityTPS>().currentReputation += reputationReward;
@@ -209,6 +242,7 @@ public class QuestGiver : MonoBehaviour
                 }
 
             }
+            smartContractUI.transform.Find("Questline").GetComponent<TextMeshProUGUI>().text = questLineText;
         }
     }
 
@@ -241,10 +275,13 @@ public class QuestGiver : MonoBehaviour
 
         string questTitleAppended = "";
 
-        if( player.GetComponent<UnityTPS>().day < 10){
-            questTitleAppended = "0"+player.GetComponent<UnityTPS>().day+questTitle;
-        } else {
-            questTitleAppended = player.GetComponent<UnityTPS>().day+questTitle;
+        if (player.GetComponent<UnityTPS>().day < 10)
+        {
+            questTitleAppended = "0" + player.GetComponent<UnityTPS>().day + questTitle;
+        }
+        else
+        {
+            questTitleAppended = player.GetComponent<UnityTPS>().day + questTitle;
         }
 
         player.GetComponent<UnityTPS>().completedQuests.Add(questTitleAppended);
