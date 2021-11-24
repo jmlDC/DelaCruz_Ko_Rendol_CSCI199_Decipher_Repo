@@ -9,6 +9,7 @@ TagManager:
   - Building
   - Land
   - NPCTag
+  - Trigger
   layers:
   - Default
   - TransparentFX

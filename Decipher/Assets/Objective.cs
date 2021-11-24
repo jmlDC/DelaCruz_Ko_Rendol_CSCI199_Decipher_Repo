@@ -9,6 +9,8 @@ public class Objective
     public string objectiveDesc;
     public GameObject requiredInteractionObject;
 
+    public bool isDestination;
+
     public bool isAccomplished;
 
     public string[] customDialogue;

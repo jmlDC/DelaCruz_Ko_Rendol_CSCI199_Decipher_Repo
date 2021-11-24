@@ -37,6 +37,8 @@ public class UnityTPS : MonoBehaviour
 
     public GameObject[] interactables;
 
+    public Collider latestCollision;
+
     public Text lul;
 
     [Header("Date")]
@@ -108,7 +110,7 @@ public class UnityTPS : MonoBehaviour
         initializeNPCTags();
 
         float dialogueIndicatorYSize = dialogueIndicator.transform.Find("dialogueBox").GetComponent<RectTransform>().sizeDelta.y;
-        dialogueIndicator.transform.Find("dialogueBox").GetComponent<RectTransform>().sizeDelta = new Vector2(2* Screen.width,dialogueIndicatorYSize);
+        dialogueIndicator.transform.Find("dialogueBox").GetComponent<RectTransform>().sizeDelta = new Vector2(2 * Screen.width, dialogueIndicatorYSize);
 
         afterDayDialogueCounter = 0;
         afterDayMaxDialogueCounter = gameObject.GetComponent<dayQuestTracker>().listQuestDays[day - 1].returnAfterDayDialogueArray().Length;
@@ -127,13 +129,13 @@ public class UnityTPS : MonoBehaviour
         npcNameWTSP();
         updateDay();
         callSmartContractUI();
-        
+
     }
 
     void FixedUpdate()
     {
         updateReputation();
-        
+
     }
 
     private void movePlayer()
@@ -507,10 +509,14 @@ public class UnityTPS : MonoBehaviour
         }
     }
 
-    public void callSmartContractUI(){
-        if (Input.GetKey(KeyCode.Q)){
+    public void callSmartContractUI()
+    {
+        if (Input.GetKey(KeyCode.Q))
+        {
             smartContractUI.GetComponent<SmartContractUIAnim>().onPress();
-        } else {
+        }
+        else
+        {
             smartContractUI.GetComponent<SmartContractUIAnim>().onRelease();
         }
     }
@@ -529,27 +535,40 @@ public class UnityTPS : MonoBehaviour
         controller.transform.position = originPosition;
     }
 
-    public void npcNameWTSP(){
+    public void npcNameWTSP()
+    {
 
-        foreach(var interactable in interactables){
-            try{
+        foreach (var interactable in interactables)
+        {
+            try
+            {
                 interactable.transform.Find("npcText").transform.LookAt(cameraX.transform);
-            }catch (Exception e){
+            }
+            catch (Exception e)
+            {
                 // Debug.Log("No npcText tag for this interactable.");
             }
-            
+
         }
-        
+
     }
 
-    public void initializeNPCTags(){
+    public void initializeNPCTags()
+    {
         interactables = GameObject.FindGameObjectsWithTag("Interactable");
     }
 
-    public void updateDay(){
-        persistentUI.transform.Find("dayText").gameObject.GetComponent<Text>().text = "Day "+day;
+    public void updateDay()
+    {
+        persistentUI.transform.Find("dayText").gameObject.GetComponent<Text>().text = "Day " + day;
     }
 
+    void OnTriggerEnter(Collider col)
+    {
+        if(col.tag == "Trigger"){
+            Debug.Log("Collision with a trigger object detected.");
+        }
+    }
 }
 
 

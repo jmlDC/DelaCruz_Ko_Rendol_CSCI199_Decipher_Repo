@@ -45,6 +45,8 @@ public class QuestGiver : MonoBehaviour
 
     public int debugCounter;
 
+    public Collider playerCollider;
+
     public GameObject designatedMarkerLocation;
 
     void Start()
@@ -88,6 +90,20 @@ public class QuestGiver : MonoBehaviour
             questUI.transform.Find("Marker/Distance").GetComponent<Text>().text = stringifiedDistance;
             questUI.transform.Find("uiDistance").GetComponent<Text>().text = stringifiedDistance;
             player.GetComponent<UnityTPS>().waypointMarker.transform.position = waypointPosition;
+
+            if (objectiveList[objectiveCounter].isDestination)
+            {
+                playerCollider = player.GetComponent<Collider>();
+                Collider objectiveCollider = objectiveList[objectiveCounter].requiredInteractionObject.GetComponent<Collider>();
+
+                if (playerCollider.bounds.Intersects(objectiveCollider.bounds))
+                {
+                    Debug.Log("Collider objective completed.");
+                    objectiveList[objectiveCounter].setAccomplishedState();
+                    updateQuestUI();
+                }
+            }
+
         }
     }
     public void startQuestUI()
@@ -123,31 +139,37 @@ public class QuestGiver : MonoBehaviour
 
                     if (x.checkObjectiveState())
                     {
-                        questLineText += x.objectiveDesc + " (Complete)\n";
+                        questLineText += "Complete | " + x.objectiveDesc + "\n";
                     }
                     else
                     {
-                        questLineText += x.objectiveDesc + "\n";
+                        questLineText += "Pending | " + x.objectiveDesc + "\n";
                     }
                     // foreach (var x in objective.requiredInteractionObject.GetComponent<Dialogue>().sentences)
                     // {
                     //     Debug.Log(">>>: "+ x + " | " + objective.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName());
                     // }
                     // tempDialogueBackupList.Add(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName());
-                    dialogueDict.Add(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(), x.requiredInteractionObject.GetComponent<Dialogue>().sentences);
-                    if (x.customDialogue.Length != 0)
+                    if (!x.isDestination)
                     {
-                        customDialogueDict.Add(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(), x.customDialogue);
-                    }
-                    else
-                    {
-                        customDialogueDict.Add(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(), x.requiredInteractionObject.GetComponent<Dialogue>().sentences);
+                        dialogueDict.Add(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(), x.requiredInteractionObject.GetComponent<Dialogue>().sentences);
+
+                        if (x.customDialogue.Length != 0)
+                        {
+                            customDialogueDict.Add(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(), x.customDialogue);
+                        }
+                        else
+                        {
+                            customDialogueDict.Add(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(), x.requiredInteractionObject.GetComponent<Dialogue>().sentences);
+                        }
+
+                        if (x.customDialogue.Length != 0)
+                        {
+                            x.requiredInteractionObject.GetComponent<Dialogue>().sentences = x.customDialogue;
+                        }
                     }
 
-                    if (x.customDialogue.Length != 0)
-                    {
-                        x.requiredInteractionObject.GetComponent<Dialogue>().sentences = x.customDialogue;
-                    }
+
                 }
 
                 if (startingDialogue.Length != 0)
@@ -163,37 +185,42 @@ public class QuestGiver : MonoBehaviour
     }
 
     public void updateQuestUI()
-    {   
+    {
         questLineText = null;
         Debug.Log(objectiveCounter + 1 + " | " + objectiveList.Length);
         if (customDialogueDict.Count != 0)
         {
             foreach (var t in objectiveList)
             {
-                foreach (var u in customDialogueDict)
+                if (!t.isDestination)
                 {
-                    if (t.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName() == u.Key)
+                    foreach (var u in customDialogueDict)
                     {
-                        t.requiredInteractionObject.GetComponent<Dialogue>().sentences = u.Value;
+                        if (t.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName() == u.Key)
+                        {
+                            t.requiredInteractionObject.GetComponent<Dialogue>().sentences = u.Value;
+                        }
+
                     }
 
                 }
 
                 if (t.checkObjectiveState())
                 {
-                    questLineText += t.objectiveDesc + "(Complete)\n";
+                    questLineText += "Complete | " + t.objectiveDesc + "\n";
                 }
                 else
                 {
-                    questLineText += t.objectiveDesc + "\n";
+                    questLineText += "Pending | " + t.objectiveDesc + "\n";
                 }
+
 
             }
         }
 
 
         if (objectiveCounter + 1 == objectiveList.Length)
-        {   
+        {
             if (parentConvoTrackerState)
             {
                 Debug.Log("Quest is complete!");
@@ -211,14 +238,19 @@ public class QuestGiver : MonoBehaviour
                 // player.GetComponent<UnityTPS>().designatedBoard=player.GetComponent<UnityTPS>().pubDesUI;
                 foreach (var objective in objectiveList)
                 {
-                    foreach (var dialogue in dialogueDict)
+                    if (!objective.isDestination)
                     {
-                        if (objective.requiredInteractionObject.name == dialogue.Key)
+                        foreach (var dialogue in dialogueDict)
                         {
-                            // Debug.Log(objective.requiredInteractionObject.name + " | " + dialogue.returnGameObjectName());
-                            objective.requiredInteractionObject.GetComponent<Dialogue>().sentences = dialogue.Value;
+                            if (objective.requiredInteractionObject.name == dialogue.Key)
+                            {
+                                // Debug.Log(objective.requiredInteractionObject.name + " | " + dialogue.returnGameObjectName());
+                                objective.requiredInteractionObject.GetComponent<Dialogue>().sentences = dialogue.Value;
+                            }
                         }
+
                     }
+
                 }
 
                 if (startingDialogue.Length != 0)
@@ -245,8 +277,6 @@ public class QuestGiver : MonoBehaviour
             smartContractUI.transform.Find("Questline").GetComponent<TextMeshProUGUI>().text = questLineText;
         }
     }
-
-
 
 
     public bool isQuestActive()
