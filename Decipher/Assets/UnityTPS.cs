@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,6 +30,8 @@ public class UnityTPS : MonoBehaviour
     public GameObject questUI;
     public GameObject fadeUI;
     public GameObject smartContractUI;
+
+    public GameObject introUI;
 
     public GameObject npcTextname;
 
@@ -106,6 +108,7 @@ public class UnityTPS : MonoBehaviour
         pubDesUI.SetActive(false);
         fadeUI.SetActive(false);
         persistentUI.SetActive(false);
+        introUI.SetActive(false);
         // smartContractUI.SetActive(false);
         initializeNPCTags();
 
@@ -455,6 +458,12 @@ public class UnityTPS : MonoBehaviour
         cameraX.gameObject.GetComponent<CinemachineBrain>().enabled = false;
     }
 
+    public void setFocusToUIIntroMode()
+    {
+        allowMove = false;
+        Cursor.visible = true;
+    }
+
     public void setFocusToGame()
     {
         allowMove = true;
@@ -511,7 +520,7 @@ public class UnityTPS : MonoBehaviour
 
     public void callSmartContractUI()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Tab) && allowMove)
         {
             smartContractUI.GetComponent<SmartContractUIAnim>().onPress();
         }
@@ -570,7 +579,6 @@ public class UnityTPS : MonoBehaviour
         }
     }
 }
-
 
 
 
