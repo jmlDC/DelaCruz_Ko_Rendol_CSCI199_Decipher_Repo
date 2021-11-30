@@ -118,6 +118,7 @@ public class UnityTPS : MonoBehaviour
         afterDayDialogueCounter = 0;
         afterDayMaxDialogueCounter = gameObject.GetComponent<dayQuestTracker>().listQuestDays[day - 1].returnAfterDayDialogueArray().Length;
 
+
         Application.targetFrameRate = 60;
 
 

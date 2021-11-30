@@ -31,6 +31,11 @@ public class QuestGiver : MonoBehaviour
 
     [SerializeField]
     public bool isActive;
+
+
+    [SerializeField]
+    public bool questAnchoredToPlayer;
+
     [SerializeField]
     public int reputationReward;
 
@@ -39,6 +44,9 @@ public class QuestGiver : MonoBehaviour
     public bool isComplete;
 
     public bool parentConvoTrackerState;
+
+    public bool collisionRedundancyChecker;
+    public bool collisionRedundancyChecker2;
 
     public Dictionary<string, string[]> dialogueDict = new Dictionary<string, string[]>();
     public Dictionary<string, string[]> customDialogueDict = new Dictionary<string, string[]>();
@@ -91,23 +99,51 @@ public class QuestGiver : MonoBehaviour
             questUI.transform.Find("uiDistance").GetComponent<Text>().text = stringifiedDistance;
             player.GetComponent<UnityTPS>().waypointMarker.transform.position = waypointPosition;
 
-            if (objectiveList[objectiveCounter].isDestination)
+            if (isActive)
             {
-                playerCollider = player.GetComponent<Collider>();
-                Collider objectiveCollider = objectiveList[objectiveCounter].requiredInteractionObject.GetComponent<Collider>();
-
-                if (playerCollider.bounds.Intersects(objectiveCollider.bounds))
+                if (designatedMarkerLocation != null)
                 {
-                    Debug.Log("Collider objective completed.");
-                    objectiveList[objectiveCounter].setAccomplishedState();
-                    updateQuestUI();
+                    if (true)
+                    {
+                        if (objectiveList[objectiveCounter].isDestination)
+                        {
+                            playerCollider = player.GetComponent<Collider>();
+                            Collider objectiveCollider = objectiveList[objectiveCounter].requiredInteractionObject.GetComponent<Collider>();
+
+                            if (playerCollider.bounds.Intersects(objectiveCollider.bounds))
+                            {
+
+                                collisionRedundancyChecker = true;
+                                collisionRedundancyChecker2 = true;
+
+                            }
+                            else
+                            {
+                                collisionRedundancyChecker = false;
+
+                                if (collisionRedundancyChecker2 && !collisionRedundancyChecker)
+                                {
+                                    Debug.Log("Collider objective completed.");
+                                    objectiveList[objectiveCounter].setAccomplishedState();
+                                    player.GetComponent<UnityTPS>().currentQuest.updateQuestUI();
+                                }
+                                collisionRedundancyChecker2 = false;
+                            }
+                        }
+                    }
+
                 }
             }
 
         }
     }
+
+
+
+
     public void startQuestUI()
     {
+        Debug.Log(objectiveCounter + 1 + " | " + objectiveList.Length);
         objectiveCounter = 0;
         debugCounter = 0;
         if (!isActive)
@@ -221,6 +257,7 @@ public class QuestGiver : MonoBehaviour
 
         if (objectiveCounter + 1 == objectiveList.Length)
         {
+            Debug.Log("Current quest is set up to finish.");
             if (parentConvoTrackerState)
             {
                 Debug.Log("Quest is complete!");
@@ -266,15 +303,31 @@ public class QuestGiver : MonoBehaviour
             Debug.Log("Quest is ongoing!");
             if (objectiveList[objectiveCounter].checkObjectiveState())
             {
-                if (parentConvoTrackerState)
+                if (!questAnchoredToPlayer)
+                {
+                    if (parentConvoTrackerState)
+                    {
+                        objectiveCounter++;
+                        designatedMarkerLocation = objectiveList[objectiveCounter].requiredInteractionObject;
+                        questUI.transform.Find("Quest description/objDesc").gameObject.GetComponent<Text>().text = objectiveList[objectiveCounter].objectiveDesc;
+                    }
+
+                }
+                else
                 {
                     objectiveCounter++;
                     designatedMarkerLocation = objectiveList[objectiveCounter].requiredInteractionObject;
+                    Debug.Log(objectiveList[objectiveCounter].objectiveDesc);
                     questUI.transform.Find("Quest description/objDesc").gameObject.GetComponent<Text>().text = objectiveList[objectiveCounter].objectiveDesc;
                 }
 
+
             }
             smartContractUI.transform.Find("Questline").GetComponent<TextMeshProUGUI>().text = questLineText;
+        }
+        else
+        {
+            Debug.Log("Neither function condition is passed.");
         }
     }
 
