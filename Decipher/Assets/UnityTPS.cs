@@ -275,7 +275,7 @@ public class UnityTPS : MonoBehaviour
         {
             allowMove = false;
             resetPlayerPosition();
-            Debug.Log(afterDayDialogueCounter);
+            setFocusToGame();
             if (afterDayDialogueCounter <= afterDayMaxDialogueCounter)
             {
                 if (Input.GetKeyDown(KeyCode.E))
