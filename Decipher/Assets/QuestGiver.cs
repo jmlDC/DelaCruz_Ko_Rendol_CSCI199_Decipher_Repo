@@ -48,8 +48,8 @@ public class QuestGiver : MonoBehaviour
     public bool collisionRedundancyChecker;
     public bool collisionRedundancyChecker2;
 
-    public Dictionary<string, string[]> dialogueDict = new Dictionary<string, string[]>();
-    public Dictionary<string, string[]> customDialogueDict = new Dictionary<string, string[]>();
+    public List<KeyValuePair<string, dialogueIndex>> dialogueDict = new List<KeyValuePair<string, dialogueIndex>>();
+    public List<KeyValuePair<string, dialogueIndex>> customDialogueDict = new List<KeyValuePair<string, dialogueIndex>>();
 
     public int debugCounter;
 
@@ -62,8 +62,13 @@ public class QuestGiver : MonoBehaviour
         questUI = player.GetComponent<UnityTPS>().questUI;
         smartContractUI = player.GetComponent<UnityTPS>().smartContractUI;
 
+
     }
 
+    public struct dialogueIndex{
+        public string[] dialogue;
+        public int index;
+    }
 
     void Update()
     {
@@ -79,7 +84,7 @@ public class QuestGiver : MonoBehaviour
 
             Vector2 waypointPosition = Camera.main.WorldToScreenPoint(designatedMarkerLocation.transform.position + player.GetComponent<UnityTPS>().offset);
 
-            if (Vector3.Dot((designatedMarkerLocation.transform.position - player.transform.position), player.transform.forward) < 0)
+            if (Vector3.Dot((designatedMarkerLocation.transform.position - player.GetComponent<UnityTPS>().cameraX.transform.position), player.GetComponent<UnityTPS>().cameraX.transform.forward) < 0)
             {
                 if (waypointPosition.x < Screen.width / 2)
                 {
@@ -98,6 +103,11 @@ public class QuestGiver : MonoBehaviour
             questUI.transform.Find("Marker/Distance").GetComponent<Text>().text = stringifiedDistance;
             questUI.transform.Find("uiDistance").GetComponent<Text>().text = stringifiedDistance;
             player.GetComponent<UnityTPS>().waypointMarker.transform.position = waypointPosition;
+
+            if (Input.GetKeyDown(KeyCode.L)){
+                player.GetComponent<UnityTPS>().currentQuest.returnCurrentObjective().setAccomplishedState();
+                player.GetComponent<UnityTPS>().currentQuest.updateQuestUI();
+            }
 
             if (isActive)
             {
@@ -170,9 +180,11 @@ public class QuestGiver : MonoBehaviour
             if (dialogueDict.Count == 0)
             {
                 debugCounter++;
+                int objDialogueIndex = 0;
+                
                 foreach (var x in objectiveList)
                 {
-
+                    
                     if (x.checkObjectiveState())
                     {
                         questLineText += "Complete | " + x.objectiveDesc + "\n";
@@ -188,15 +200,30 @@ public class QuestGiver : MonoBehaviour
                     // tempDialogueBackupList.Add(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName());
                     if (!x.isDestination)
                     {
-                        dialogueDict.Add(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(), x.requiredInteractionObject.GetComponent<Dialogue>().sentences);
+                        dialogueIndex tempDiaIndex = new dialogueIndex();
+                        tempDiaIndex.dialogue = x.requiredInteractionObject.GetComponent<Dialogue>().sentences;
+                        tempDiaIndex.index = objDialogueIndex;
+                        KeyValuePair<string,dialogueIndex> temp = new KeyValuePair<string,dialogueIndex>(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(),tempDiaIndex);
+                        dialogueDict.Add(temp);
 
                         if (x.customDialogue.Length != 0)
                         {
-                            customDialogueDict.Add(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(), x.customDialogue);
+                            dialogueIndex tempCustomDiaIndex = new dialogueIndex();
+                            tempCustomDiaIndex.dialogue = x.customDialogue;
+                            tempCustomDiaIndex.index = objDialogueIndex;
+
+                            KeyValuePair<string,dialogueIndex> tempCustom = new KeyValuePair<string,dialogueIndex>(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(),tempCustomDiaIndex);
+                            customDialogueDict.Add(tempCustom);
                         }
                         else
                         {
-                            customDialogueDict.Add(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(), x.requiredInteractionObject.GetComponent<Dialogue>().sentences);
+                            dialogueIndex tempCustomDiaIndex = new dialogueIndex();
+                            tempCustomDiaIndex.dialogue = x.requiredInteractionObject.GetComponent<Dialogue>().sentences;
+                            tempCustomDiaIndex.index = objDialogueIndex;
+
+                            KeyValuePair<string,dialogueIndex> tempCustom = new KeyValuePair<string,dialogueIndex>(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(),tempCustomDiaIndex);
+                            customDialogueDict.Add(tempCustom);
+                            // customDialogueDict.Add(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(), x.requiredInteractionObject.GetComponent<Dialogue>().sentences);
                         }
 
                         if (x.customDialogue.Length != 0)
@@ -205,7 +232,15 @@ public class QuestGiver : MonoBehaviour
                         }
                     }
 
+                    objDialogueIndex++;
 
+                }
+
+
+                foreach(var lul in dialogueDict){
+                    if (lul.Key=="Ninmu Irai"){
+                        Debug.Log(lul);
+                    }
                 }
 
                 if (startingDialogue.Length != 0)
@@ -232,9 +267,9 @@ public class QuestGiver : MonoBehaviour
                 {
                     foreach (var u in customDialogueDict)
                     {
-                        if (t.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName() == u.Key)
+                        if (t.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName() == u.Key && objectiveCounter == u.Value.index)
                         {
-                            t.requiredInteractionObject.GetComponent<Dialogue>().sentences = u.Value;
+                            t.requiredInteractionObject.GetComponent<Dialogue>().sentences = u.Value.dialogue;
                         }
 
                     }
@@ -266,7 +301,7 @@ public class QuestGiver : MonoBehaviour
                 questUI.transform.Find("questName").gameObject.GetComponent<Text>().text = null;
                 questUI.transform.Find("Quest description/objDesc").gameObject.GetComponent<Text>().text = null;
                 smartContractUI.transform.Find("QuestTitle").GetComponent<Text>().text = "No quest active.";
-                smartContractUI.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = null;
+                smartContractUI.transform.Find("Description").GetComponent<TextMeshProUGUI>().text = "If you don't know what to do, talk to the manager!";
                 smartContractUI.transform.Find("Questline").GetComponent<TextMeshProUGUI>().text = "No objectives.";
                 player.GetComponent<UnityTPS>().currentQuest = null;
                 player.GetComponent<UnityTPS>().globalQuestTracker = false;
@@ -282,7 +317,7 @@ public class QuestGiver : MonoBehaviour
                             if (objective.requiredInteractionObject.name == dialogue.Key)
                             {
                                 // Debug.Log(objective.requiredInteractionObject.name + " | " + dialogue.returnGameObjectName());
-                                objective.requiredInteractionObject.GetComponent<Dialogue>().sentences = dialogue.Value;
+                                objective.requiredInteractionObject.GetComponent<Dialogue>().sentences = dialogue.Value.dialogue;
                             }
                         }
 

@@ -457,12 +457,14 @@ public class UnityTPS : MonoBehaviour
         allowMove = false;
         Cursor.visible = true;
         cameraX.gameObject.GetComponent<CinemachineBrain>().enabled = false;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void setFocusToUIIntroMode()
     {
         allowMove = false;
         Cursor.visible = true;
+        // Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void setFocusToGame()
@@ -470,6 +472,7 @@ public class UnityTPS : MonoBehaviour
         allowMove = true;
         Cursor.visible = false;
         cameraX.gameObject.GetComponent<CinemachineBrain>().enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void checkDayStatus()
