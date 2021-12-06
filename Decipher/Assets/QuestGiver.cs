@@ -8,10 +8,14 @@ public class QuestGiver : MonoBehaviour
 {
 
     public CharacterController player;
+    [SerializeField]
+    public int optionalPriorityCount;
 
 
     private GameObject questUI;
     private GameObject smartContractUI;
+
+    private GameObject questAcceptUI;
 
     [SerializeField]
     public string questTitle;
@@ -61,11 +65,13 @@ public class QuestGiver : MonoBehaviour
     {
         questUI = player.GetComponent<UnityTPS>().questUI;
         smartContractUI = player.GetComponent<UnityTPS>().smartContractUI;
+        questAcceptUI = player.GetComponent<UnityTPS>().questAcceptUI;
 
 
     }
 
-    public struct dialogueIndex{
+    public struct dialogueIndex
+    {
         public string[] dialogue;
         public int index;
     }
@@ -104,7 +110,8 @@ public class QuestGiver : MonoBehaviour
             questUI.transform.Find("uiDistance").GetComponent<Text>().text = stringifiedDistance;
             player.GetComponent<UnityTPS>().waypointMarker.transform.position = waypointPosition;
 
-            if (Input.GetKeyDown(KeyCode.L)){
+            if (Input.GetKeyDown(KeyCode.L))
+            {
                 player.GetComponent<UnityTPS>().currentQuest.returnCurrentObjective().setAccomplishedState();
                 player.GetComponent<UnityTPS>().currentQuest.updateQuestUI();
             }
@@ -148,11 +155,32 @@ public class QuestGiver : MonoBehaviour
         }
     }
 
+    public void copyStartingDialogue()
+    {   
+        
+        player.GetComponent<UnityTPS>().globalQuestTracker = true;
+        if (startingDialogue.Length != 0)
+        {   
+            ogDialogue = gameObject.GetComponent<Dialogue>().sentences;
+            gameObject.GetComponent<Dialogue>().sentences = startingDialogue;
+        }
 
+    }
+
+    public void displayQuestAcceptUI()
+    {
+        
+        player.GetComponent<UnityTPS>().questAcceptUI.SetActive(true);
+        player.GetComponent<UnityTPS>().setFocusToUI();
+        questAcceptUI.transform.Find("QuestTitle").gameObject.GetComponent<Text>().text = questTitle;
+        questAcceptUI.transform.Find("Contents").GetComponent<TextMeshProUGUI>().text = questDesc;
+
+    }
 
 
     public void startQuestUI()
     {
+
         Debug.Log(objectiveCounter + 1 + " | " + objectiveList.Length);
         objectiveCounter = 0;
         debugCounter = 0;
@@ -169,22 +197,15 @@ public class QuestGiver : MonoBehaviour
             isActive = true;
             player.GetComponent<UnityTPS>().globalQuestTracker = true;
 
-            if (startingDialogue.Length != 0)
-            {
-                ogDialogue = gameObject.GetComponent<Dialogue>().sentences;
-            }
-
-
-
 
             if (dialogueDict.Count == 0)
             {
                 debugCounter++;
                 int objDialogueIndex = 0;
-                
+
                 foreach (var x in objectiveList)
                 {
-                    
+
                     if (x.checkObjectiveState())
                     {
                         questLineText += "Complete | " + x.objectiveDesc + "\n";
@@ -203,7 +224,7 @@ public class QuestGiver : MonoBehaviour
                         dialogueIndex tempDiaIndex = new dialogueIndex();
                         tempDiaIndex.dialogue = x.requiredInteractionObject.GetComponent<Dialogue>().sentences;
                         tempDiaIndex.index = objDialogueIndex;
-                        KeyValuePair<string,dialogueIndex> temp = new KeyValuePair<string,dialogueIndex>(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(),tempDiaIndex);
+                        KeyValuePair<string, dialogueIndex> temp = new KeyValuePair<string, dialogueIndex>(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(), tempDiaIndex);
                         dialogueDict.Add(temp);
 
                         if (x.customDialogue.Length != 0)
@@ -212,7 +233,7 @@ public class QuestGiver : MonoBehaviour
                             tempCustomDiaIndex.dialogue = x.customDialogue;
                             tempCustomDiaIndex.index = objDialogueIndex;
 
-                            KeyValuePair<string,dialogueIndex> tempCustom = new KeyValuePair<string,dialogueIndex>(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(),tempCustomDiaIndex);
+                            KeyValuePair<string, dialogueIndex> tempCustom = new KeyValuePair<string, dialogueIndex>(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(), tempCustomDiaIndex);
                             customDialogueDict.Add(tempCustom);
                         }
                         else
@@ -221,37 +242,41 @@ public class QuestGiver : MonoBehaviour
                             tempCustomDiaIndex.dialogue = x.requiredInteractionObject.GetComponent<Dialogue>().sentences;
                             tempCustomDiaIndex.index = objDialogueIndex;
 
-                            KeyValuePair<string,dialogueIndex> tempCustom = new KeyValuePair<string,dialogueIndex>(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(),tempCustomDiaIndex);
+                            KeyValuePair<string, dialogueIndex> tempCustom = new KeyValuePair<string, dialogueIndex>(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(), tempCustomDiaIndex);
                             customDialogueDict.Add(tempCustom);
                             // customDialogueDict.Add(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName(), x.requiredInteractionObject.GetComponent<Dialogue>().sentences);
                         }
 
-                        if (x.customDialogue.Length != 0)
-                        {
-                            x.requiredInteractionObject.GetComponent<Dialogue>().sentences = x.customDialogue;
-                        }
+                        // if (x.customDialogue.Length != 0)
+                        // {
+                        //     x.requiredInteractionObject.GetComponent<Dialogue>().sentences = x.customDialogue;
+                        // }
+
+                    }
+
+                    // Debug.Log("Objective state:" + x.checkChangedObjectExistence() + " | changed obj name: " + x.changedObject);
+
+
+                    if (x.checkChangedObjectExistence())
+                    {
+                        x.initializeChangedObjectState();
+                        // Debug.Log("Set variable object status should have changed. | " + x.changedObject);
+                    }
+                    else
+                    {
+                        // Debug.Log("No object to be changed for this objective.");
                     }
 
                     objDialogueIndex++;
 
                 }
 
-
-                foreach(var lul in dialogueDict){
-                    if (lul.Key=="Ninmu Irai"){
-                        Debug.Log(lul);
-                    }
-                }
-
-                if (startingDialogue.Length != 0)
-                {
-                    gameObject.GetComponent<Dialogue>().sentences = startingDialogue;
-                }
-
                 smartContractUI.transform.Find("Questline").GetComponent<TextMeshProUGUI>().text = questLineText;
 
             }
         }
+
+
 
     }
 
@@ -270,6 +295,7 @@ public class QuestGiver : MonoBehaviour
                         if (t.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName() == u.Key && objectiveCounter == u.Value.index)
                         {
                             t.requiredInteractionObject.GetComponent<Dialogue>().sentences = u.Value.dialogue;
+                            Debug.Log("Replaced "+t.requiredInteractionObject.name+"'s dialogue.");
                         }
 
                     }
@@ -284,7 +310,6 @@ public class QuestGiver : MonoBehaviour
                 {
                     questLineText += "Pending | " + t.objectiveDesc + "\n";
                 }
-
 
             }
         }
@@ -325,11 +350,12 @@ public class QuestGiver : MonoBehaviour
 
                 }
 
-                if (startingDialogue.Length != 0)
-                {
+                if (startingDialogue.Length !=0){
                     gameObject.GetComponent<Dialogue>().sentences = ogDialogue;
                 }
+                
                 dialogueDict.Clear();
+                Destroy(this);
 
             }
         }

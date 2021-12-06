@@ -15,6 +15,7 @@ public class UnityTPS : MonoBehaviour
     public Transform cameraX;
     private Animator anim;
 
+
     [Header("Waypoint Marker")]
     public RawImage waypointMarker;
     public Vector3 offset;
@@ -28,6 +29,8 @@ public class UnityTPS : MonoBehaviour
     public GameObject pubDesUI;
     public GameObject designatedBoard;
     public GameObject questUI;
+
+    public GameObject questAcceptUI;
     public GameObject fadeUI;
     public GameObject smartContractUI;
 
@@ -43,6 +46,8 @@ public class UnityTPS : MonoBehaviour
 
     public Text lul;
 
+
+
     [Header("Date")]
     public int day = 1;
     public bool dayChangeState = false;
@@ -51,7 +56,10 @@ public class UnityTPS : MonoBehaviour
 
     [Header("Quest Status")]
     public QuestGiver currentQuest;
+
+    public string currentQuestName;
     public bool globalQuestTracker;
+
 
     [Header("Gameplay stats")]
     public int currentReputation;
@@ -77,6 +85,8 @@ public class UnityTPS : MonoBehaviour
     [Header("Interaction query")]
     [SerializeField] public string currentInteractable;
 
+    public bool starterDialogue;
+
 
     [Header("Gravity")]
     [SerializeField] private bool gravityCheck;
@@ -92,6 +102,14 @@ public class UnityTPS : MonoBehaviour
 
     public List<string> completedQuestsSubstring = new List<string>();
 
+
+    // [Header("Idle blend value")]
+
+    // public float idleBlendValue;
+
+    // public bool dumbBoolCheck;
+
+    // public bool dumbBoolCheck2 = false;
 
 
 
@@ -109,8 +127,11 @@ public class UnityTPS : MonoBehaviour
         fadeUI.SetActive(false);
         persistentUI.SetActive(false);
         introUI.SetActive(false);
+        questAcceptUI.SetActive(false);
         // smartContractUI.SetActive(false);
         initializeNPCTags();
+        // StartCoroutine(changeIdleBlendValue());
+
 
         float dialogueIndicatorYSize = dialogueIndicator.transform.Find("dialogueBox").GetComponent<RectTransform>().sizeDelta.y;
         dialogueIndicator.transform.Find("dialogueBox").GetComponent<RectTransform>().sizeDelta = new Vector2(2 * Screen.width, dialogueIndicatorYSize);
@@ -134,11 +155,30 @@ public class UnityTPS : MonoBehaviour
         updateDay();
         callSmartContractUI();
 
+
+        // if (moveSpeed == 0){
+        //     setIdleRandomly(idleBlendValue,dumbBoolCheck);
+        //     dumbBoolCheck2 = true;
+        // }
+
     }
 
     void FixedUpdate()
     {
         updateReputation();
+        lulw();
+
+    }
+
+    public void lulw()
+    {
+        try
+        {
+            currentQuestName = currentQuest.questTitle;
+        }
+        catch (Exception e)
+        {
+        }
 
     }
 
@@ -242,24 +282,29 @@ public class UnityTPS : MonoBehaviour
     {
         moveSpeed = runSpeed * multiplier;
         anim.SetFloat("Blend", 2f, 0.15f, Time.deltaTime);
+        // anim.SetFloat("IdleBlend", 0f, 0, Time.deltaTime);
     }
 
     private void playerWalk(float multiplier)
     {
         moveSpeed = walkSpeed * multiplier;
         anim.SetFloat("Blend", 1f, 0.15f, Time.deltaTime);
+        // anim.SetFloat("IdleBlend", 0f, 0, Time.deltaTime);
     }
 
     private void playerIdle()
     {
         moveSpeed = 0;
         anim.SetFloat("Blend", 0f, 0.15f, Time.deltaTime);
+
     }
 
     private void playerJump()
     {
         anim.SetTrigger("Jump");
+        // anim.SetFloat("IdleBlend", 0f, 0, Time.deltaTime);
         velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+
 
     }
     private int dialogueCounter = 0;
@@ -336,35 +381,39 @@ public class UnityTPS : MonoBehaviour
                     limaw = currentGameObject.name;
                     LULCHECK = true;
 
-                    if (currentGameObject.GetComponent<QuestGiver>() != null)
-                    {
-                        // Debug.Log("This object can provide a quest.");
-                    }
+                    // if (currentGameObject.GetComponent<QuestGiver>() != null)
+                    // {
+                    //     // Debug.Log("This object can provide a quest.");
+                    // }
 
                     if (Input.GetKeyDown(KeyCode.E) && !Cursor.visible)
                     {
+
+
                         if (currentGameObject.GetComponent<QuestGiver>() != null)
                         {
                             QuestGiver[] questList = currentGameObject.GetComponents<QuestGiver>();
 
-                            foreach (QuestGiver quest in questList)
+                            // foreach (QuestGiver quest in questList)
+                            // {
+                            if (!questList[0].isQuestActive())
                             {
-                                if (!quest.isQuestActive())
+                                if (!globalQuestTracker)
                                 {
-                                    if (!globalQuestTracker)
+                                    if (!questList[0].isQuestComplete())
                                     {
-                                        if (!quest.isQuestComplete())
-                                        {
-                                            currentQuest = quest;
-                                            quest.startQuestUI();
-                                        }
+                                        questList[0].copyStartingDialogue();
+                                        currentQuest = questList[0];
 
                                     }
 
                                 }
-                            }
 
+                            }
+                            // }
                         }
+
+
                         dialogueIndicator.SetActive(true);
                         // dialogueIndicator.transform.Find("ObjectName").gameObject.GetComponent<Text>().text = limaw;
                         if (currentGameObject.GetComponent<Dialogue>().returnDialogue().Length > dialogueCounter)
@@ -383,12 +432,16 @@ public class UnityTPS : MonoBehaviour
                                 pubDesUI.GetComponent<PubDesScript>().pubDesConsolidatedMethod();
                                 setFocusToUI();
                             }
+
                             // dialogueIndicator.transform.Find("ObjectName").gameObject.GetComponent<Text>().text = null;
                             dialogueIndicator.SetActive(false);
                             dialogueCounter = 0;
                             currentConversationEnd = true;
                         }
 
+                        if (currentConversationEnd && !currentQuest.isActive && globalQuestTracker){
+                            currentQuest.displayQuestAcceptUI();
+                        }
 
 
                         if (currentQuest != null)
@@ -578,11 +631,63 @@ public class UnityTPS : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.tag == "Trigger"){
+        if (col.tag == "Trigger")
+        {
             Debug.Log("Collision with a trigger object detected.");
         }
     }
+
+
+
+    // public void setIdleRandomly(float blend, bool boolx)
+    // {
+
+    //     if (boolx)
+    //     {
+    //         anim.SetFloat("IdleBlend", blend, 1f, Time.deltaTime);
+    //         // dumbBoolCheck2 = true;
+    //     }
+    //     else
+    //     {
+    //         anim.SetFloat("IdleBlend", 0, 2f, Time.deltaTime);
+    //         // dumbBoolCheck2 = false;
+    //     }
+
+    // }
+
+
+    // IEnumerator changeIdleBlendValue()
+    // {
+    //     for (; ; )
+    //     {
+
+    //         if (moveSpeed == 0 || persistentUI.activeSelf == false)
+    //         {   
+    //             if(dumbBoolCheck2){
+    //                 yield return new WaitForSeconds(0.05f);
+    //                 dumbBoolCheck2 = false;
+    //             }
+
+    //             idleBlendValue = 1; //UnityEngine.Random.Range(1, 5);
+    //             // Debug.Log("Current idle blend value:" + idleBlendValue);
+    //             dumbBoolCheck = true;
+    //             // if (dumbBoolCheck2)
+    //             // {
+    //             //     yield return new WaitForSeconds(0.15f);
+    //             //     yield return new WaitForEndOfFrame();
+    //             // }
+    //             Debug.Log("Waiting for 9seconds (ANIMATION LENGTH)");
+    //             yield return new WaitForSeconds(9f);
+    //             dumbBoolCheck = false;
+    //             // Debug.Log("Waiting for 5s");
+    //             yield return new WaitForSeconds(15f);
+    //         }
+
+
+    //     }
+    // }
 }
+
 
 
 
