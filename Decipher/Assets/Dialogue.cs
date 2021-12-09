@@ -12,6 +12,7 @@ public class Dialogue : MonoBehaviour
     [TextArea(3,10)]
     public string[] sentences;
     public string name;
+    public string occupation;
 
     public string gameObjectName;
 
@@ -21,7 +22,8 @@ public class Dialogue : MonoBehaviour
 
         try{
             gameObject.transform.Find("npcText").GetComponent<TMP_Text>().text = name;
-            Debug.Log("Applied name to floating tag: "+name);
+            gameObject.transform.Find("npcTextOccupation").GetComponent<TMP_Text>().text = occupation;
+            Debug.Log("Applied name to floating tag: "+name+" | Occupation: "+occupation);
         } catch (Exception e){
             Debug.Log("No npcText element inside gameObject.");
         }

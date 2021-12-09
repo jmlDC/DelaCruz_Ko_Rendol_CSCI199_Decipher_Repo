@@ -36,6 +36,8 @@ public class UnityTPS : MonoBehaviour
 
     public GameObject introUI;
 
+    public GameObject questCompleteIndicator;
+
     public GameObject npcTextname;
 
     public GameObject currentGameObject;
@@ -46,8 +48,6 @@ public class UnityTPS : MonoBehaviour
 
     public Text lul;
 
-
-
     [Header("Date")]
     public int day = 1;
     public bool dayChangeState = false;
@@ -57,6 +57,7 @@ public class UnityTPS : MonoBehaviour
     [Header("Quest Status")]
     public QuestGiver currentQuest;
 
+    public string playerID;
     public string currentQuestName;
     public bool globalQuestTracker;
 
@@ -102,6 +103,8 @@ public class UnityTPS : MonoBehaviour
 
     public List<string> completedQuestsSubstring = new List<string>();
 
+    public List<string> blocksCreated = new List<string>();
+
 
     // [Header("Idle blend value")]
 
@@ -128,16 +131,19 @@ public class UnityTPS : MonoBehaviour
         persistentUI.SetActive(false);
         introUI.SetActive(false);
         questAcceptUI.SetActive(false);
-        // smartContractUI.SetActive(false);
+        smartContractUI.SetActive(false);
+        questCompleteIndicator.SetActive(false);
         initializeNPCTags();
+        StartCoroutine(removeQuestCompleteUI());
         // StartCoroutine(changeIdleBlendValue());
+
 
 
         float dialogueIndicatorYSize = dialogueIndicator.transform.Find("dialogueBox").GetComponent<RectTransform>().sizeDelta.y;
         dialogueIndicator.transform.Find("dialogueBox").GetComponent<RectTransform>().sizeDelta = new Vector2(2 * Screen.width, dialogueIndicatorYSize);
 
         afterDayDialogueCounter = 0;
-        afterDayMaxDialogueCounter = gameObject.GetComponent<dayQuestTracker>().listQuestDays[day - 1].returnAfterDayDialogueArray().Length;
+        afterDayMaxDialogueCounter = gameObject.GetComponent<dayQuestTracker>().listQuestDays[day - 1].returnAfterDayDialogueImageArray().Length;
 
 
         Application.targetFrameRate = 60;
@@ -156,6 +162,7 @@ public class UnityTPS : MonoBehaviour
         callSmartContractUI();
 
 
+
         // if (moveSpeed == 0){
         //     setIdleRandomly(idleBlendValue,dumbBoolCheck);
         //     dumbBoolCheck2 = true;
@@ -167,6 +174,7 @@ public class UnityTPS : MonoBehaviour
     {
         updateReputation();
         lulw();
+        
 
     }
 
@@ -329,7 +337,8 @@ public class UnityTPS : MonoBehaviour
                     {
                         try
                         {
-                            fadeUI.transform.Find("afterDayText").gameObject.GetComponent<Text>().text = gameObject.GetComponent<dayQuestTracker>().listQuestDays[day - 1].returnAfterDayDialogueArray()[afterDayDialogueCounter];
+                            fadeUI.transform.Find("afterDayText").gameObject.GetComponent<Text>().text = gameObject.GetComponent<dayQuestTracker>().listQuestDays[day - 1].returnAfterDayDialogueImageArray()[afterDayDialogueCounter].line;
+                            fadeUI.transform.Find("setImage").gameObject.GetComponent<RawImage>().texture = gameObject.GetComponent<dayQuestTracker>().listQuestDays[day - 1].returnAfterDayDialogueImageArray()[afterDayDialogueCounter].image;
                         }
                         catch (Exception e)
                         {
@@ -439,8 +448,14 @@ public class UnityTPS : MonoBehaviour
                             currentConversationEnd = true;
                         }
 
-                        if (currentConversationEnd && !currentQuest.isActive && globalQuestTracker){
-                            currentQuest.displayQuestAcceptUI();
+                        try
+                        {
+                            if (currentConversationEnd && !currentQuest.isActive && globalQuestTracker)
+                            {
+                                currentQuest.displayQuestAcceptUI();
+                            }
+                        } catch (Exception e){
+
                         }
 
 
@@ -557,7 +572,8 @@ public class UnityTPS : MonoBehaviour
                 {
                     try
                     {
-                        fadeUI.transform.Find("afterDayText").gameObject.GetComponent<Text>().text = gameObject.GetComponent<dayQuestTracker>().listQuestDays[day - 1].returnAfterDayDialogueArray()[afterDayDialogueCounter];
+                        fadeUI.transform.Find("afterDayText").gameObject.GetComponent<Text>().text = gameObject.GetComponent<dayQuestTracker>().listQuestDays[day - 1].returnAfterDayDialogueImageArray()[afterDayDialogueCounter].line;
+                        fadeUI.transform.Find("setImage").gameObject.GetComponent<RawImage>().texture = gameObject.GetComponent<dayQuestTracker>().listQuestDays[day - 1].returnAfterDayDialogueImageArray()[afterDayDialogueCounter].image;
                     }
                     catch (Exception e)
                     {
@@ -565,7 +581,10 @@ public class UnityTPS : MonoBehaviour
                     }
 
                 }
-                fadeUI.SetActive(true);
+
+                if (!questCompleteIndicator.activeSelf){
+                    fadeUI.SetActive(true);
+                } 
 
             }
         }
@@ -609,6 +628,7 @@ public class UnityTPS : MonoBehaviour
             try
             {
                 interactable.transform.Find("npcText").transform.LookAt(cameraX.transform);
+                interactable.transform.Find("npcTextOccupation").transform.LookAt(cameraX.transform);
             }
             catch (Exception e)
             {
@@ -635,6 +655,30 @@ public class UnityTPS : MonoBehaviour
         {
             Debug.Log("Collision with a trigger object detected.");
         }
+    }
+
+    IEnumerator removeQuestCompleteUI()
+    {
+        for (; ; )
+        {   
+            // Debug.Log("Performing coroutine quest complete UI check.");
+            yield return new WaitForSeconds(5f);
+            if (questCompleteIndicator.activeSelf)
+            {
+                // Debug.Log("Quest Complete UI is active!! Attempting to fade out.");
+                yield return new WaitForSeconds(3f);
+                //fade out
+                questCompleteIndicator.transform.Find("complete").GetComponent<Text>().CrossFadeAlpha(0f, 1f, false);
+                questCompleteIndicator.transform.Find("desc").GetComponent<TextMeshProUGUI>().CrossFadeAlpha(0f, 1f, false);
+                questCompleteIndicator.transform.Find("shadow").GetComponent<RawImage>().CrossFadeAlpha(0f, 1f, false);
+
+                yield return new WaitForSeconds(1f);
+
+                questCompleteIndicator.SetActive(false);
+                Debug.Log("Successfully faded out quest complete indicator.");
+            }
+        }
+
     }
 
 

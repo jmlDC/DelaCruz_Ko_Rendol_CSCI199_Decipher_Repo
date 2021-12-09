@@ -23,6 +23,7 @@ public class introUIScript : MonoBehaviour
         player.GetComponent<UnityTPS>().introUI.SetActive(false);
         player.GetComponent<UnityTPS>().updateDay();
         player.GetComponent<UnityTPS>().persistentUI.SetActive(true);
+        player.GetComponent<UnityTPS>().smartContractUI.SetActive(true);
         player.GetComponent<UnityTPS>().setFocusToGame();
         try
         {

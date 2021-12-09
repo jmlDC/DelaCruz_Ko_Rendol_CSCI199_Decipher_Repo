@@ -20,11 +20,15 @@ public class Objective
 
     public string[] customDialogue;
 
-    public void changeObjectState(){
+    public string objectiveHash;
+
+    public void changeObjectState()
+    {
         changedObject.SetActive(!trueForDisappear);
     }
-    
-    public void initializeChangedObjectState(){
+
+    public void initializeChangedObjectState()
+    {
         changedObject.SetActive(trueForDisappear);
     }
 
@@ -33,20 +37,31 @@ public class Objective
         return isAccomplished;
     }
 
-    public bool checkChangedObjectExistence(){
-        if (changedObject != null){
+    public bool checkChangedObjectExistence()
+    {
+        if (changedObject != null)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
-    public void setAccomplishedState(){
+    public void setAccomplishedState()
+    {
         isAccomplished = true;
-        if (checkChangedObjectExistence()){
+        if (checkChangedObjectExistence())
+        {
             changeObjectState();
-        }        
+        }
     }
+
+    public void setObjectiveHash(string hash){
+        objectiveHash = hash;
+    }
+
 
 
 
