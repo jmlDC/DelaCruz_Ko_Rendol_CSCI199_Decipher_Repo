@@ -7,6 +7,8 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private Animator animator;
     [SerializeField]
+    private Animator uiAnimator;
+    [SerializeField]
     private GameObject player;
 
 
@@ -23,6 +25,7 @@ public class MainMenu : MonoBehaviour
     void Update(){
         if (player.GetComponent<UnityTPS>().introUI.GetComponent<introUIScript>().playAnimationState){
             animator.Play("In-game Camera");
+            uiAnimator.Play("In-game Camera");
             Destroy(gameObject);
         }
     }

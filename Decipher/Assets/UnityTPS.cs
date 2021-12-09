@@ -13,6 +13,7 @@ public class UnityTPS : MonoBehaviour
 
     public CharacterController controller;
     public Transform cameraX;
+    public Transform uiCamera;
     private Animator anim;
 
 
@@ -450,7 +451,7 @@ public class UnityTPS : MonoBehaviour
 
                         try
                         {
-                            if (currentConversationEnd && !currentQuest.isActive && globalQuestTracker)
+                            if (currentConversationEnd && !currentQuest.isActive && globalQuestTracker && !questCompleteIndicator.activeSelf)
                             {
                                 currentQuest.displayQuestAcceptUI();
                             }
@@ -525,6 +526,7 @@ public class UnityTPS : MonoBehaviour
         allowMove = false;
         Cursor.visible = true;
         cameraX.gameObject.GetComponent<CinemachineBrain>().enabled = false;
+        uiCamera.gameObject.GetComponent<CinemachineBrain>().enabled = false;
         Cursor.lockState = CursorLockMode.None;
     }
 
@@ -540,8 +542,28 @@ public class UnityTPS : MonoBehaviour
         allowMove = true;
         Cursor.visible = false;
         cameraX.gameObject.GetComponent<CinemachineBrain>().enabled = true;
+        uiCamera.gameObject.GetComponent<CinemachineBrain>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
     }
+
+    public void fadeInQuestComplete(){
+        questCompleteIndicator.SetActive(true);
+        
+        //set opacity to 0
+        questCompleteIndicator.transform.Find("complete").GetComponent<Text>().CrossFadeAlpha(0f,0f,false);
+        questCompleteIndicator.transform.Find("desc").GetComponent<TextMeshProUGUI>().CrossFadeAlpha(0f,0f,false);
+        questCompleteIndicator.transform.Find("shadow").GetComponent<RawImage>().CrossFadeAlpha(0f,0f,false);
+
+        //fade in to 1
+        questCompleteIndicator.transform.Find("complete").GetComponent<Text>().CrossFadeAlpha(1f,1f,false);
+        questCompleteIndicator.transform.Find("desc").GetComponent<TextMeshProUGUI>().CrossFadeAlpha(1f,1f,false);
+        questCompleteIndicator.transform.Find("shadow").GetComponent<RawImage>().CrossFadeAlpha(1f,1f,false);
+
+    }
+
+    // public void fadeInUI(Transform ui){
+    //     ui.GetComponent<CanvasGroup>().CrossFadeAlpha(1f,1f,false);
+    // }
 
     public void checkDayStatus()
     {
@@ -627,8 +649,8 @@ public class UnityTPS : MonoBehaviour
         {
             try
             {
-                interactable.transform.Find("npcText").transform.LookAt(cameraX.transform);
-                interactable.transform.Find("npcTextOccupation").transform.LookAt(cameraX.transform);
+                interactable.transform.Find("npcText").transform.LookAt(uiCamera.transform);
+                interactable.transform.Find("npcTextOccupation").transform.LookAt(uiCamera.transform);
             }
             catch (Exception e)
             {
@@ -662,7 +684,7 @@ public class UnityTPS : MonoBehaviour
         for (; ; )
         {   
             // Debug.Log("Performing coroutine quest complete UI check.");
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(2f);
             if (questCompleteIndicator.activeSelf)
             {
                 // Debug.Log("Quest Complete UI is active!! Attempting to fade out.");

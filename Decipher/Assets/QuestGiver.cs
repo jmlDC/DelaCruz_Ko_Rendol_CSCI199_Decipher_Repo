@@ -92,7 +92,7 @@ public class QuestGiver : MonoBehaviour
 
             Vector2 waypointPosition = Camera.main.WorldToScreenPoint(designatedMarkerLocation.transform.position + player.GetComponent<UnityTPS>().offset);
 
-            if (Vector3.Dot((designatedMarkerLocation.transform.position - player.GetComponent<UnityTPS>().cameraX.transform.position), player.GetComponent<UnityTPS>().cameraX.transform.forward) < 0)
+            if (Vector3.Dot((designatedMarkerLocation.transform.position - player.GetComponent<UnityTPS>().uiCamera.transform.position), player.GetComponent<UnityTPS>().uiCamera.transform.forward) < 0)
             {
                 if (waypointPosition.x < Screen.width / 2)
                 {
@@ -171,11 +171,11 @@ public class QuestGiver : MonoBehaviour
 
     public void displayQuestAcceptUI()
     {
-        
-        player.GetComponent<UnityTPS>().questAcceptUI.SetActive(true);
-        player.GetComponent<UnityTPS>().setFocusToUI();
         questAcceptUI.transform.Find("QuestTitle").gameObject.GetComponent<Text>().text = questTitle;
         questAcceptUI.transform.Find("Contents").GetComponent<TextMeshProUGUI>().text = questDesc;
+        player.GetComponent<UnityTPS>().questAcceptUI.SetActive(true);
+        player.GetComponent<UnityTPS>().setFocusToUI();
+        
 
     }
 
@@ -333,7 +333,7 @@ public class QuestGiver : MonoBehaviour
                 questUI.SetActive(false);
                 setQuestAsComplete();
                 questCompleteIndicator.transform.Find("desc").GetComponent<TextMeshProUGUI>().text = questTitle;
-                fadeInUI();
+                player.GetComponent<UnityTPS>().fadeInQuestComplete();
                 
                 questUI.transform.Find("questName").gameObject.GetComponent<Text>().text = null;
                 questUI.transform.Find("Quest description/objDesc").gameObject.GetComponent<Text>().text = null;
@@ -452,21 +452,7 @@ public class QuestGiver : MonoBehaviour
         return isComplete;
     }
 
-    public void fadeInUI(){
-        questCompleteIndicator.SetActive(true);
-        
-        //set opacity to 0
-        questCompleteIndicator.transform.Find("complete").GetComponent<Text>().CrossFadeAlpha(0f,0f,false);
-        questCompleteIndicator.transform.Find("desc").GetComponent<TextMeshProUGUI>().CrossFadeAlpha(0f,0f,false);
-        questCompleteIndicator.transform.Find("shadow").GetComponent<RawImage>().CrossFadeAlpha(0f,0f,false);
-
-        //fade in to 1
-        questCompleteIndicator.transform.Find("complete").GetComponent<Text>().CrossFadeAlpha(1f,1f,false);
-        questCompleteIndicator.transform.Find("desc").GetComponent<TextMeshProUGUI>().CrossFadeAlpha(1f,1f,false);
-        questCompleteIndicator.transform.Find("shadow").GetComponent<RawImage>().CrossFadeAlpha(1f,1f,false);
-
-
-    }
+    
 
     public string createRandomHash(){
         var chars = "abcdef0123456789";
