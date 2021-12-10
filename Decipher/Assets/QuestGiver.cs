@@ -158,11 +158,11 @@ public class QuestGiver : MonoBehaviour
     }
 
     public void copyStartingDialogue()
-    {   
-        
+    {
+
         player.GetComponent<UnityTPS>().globalQuestTracker = true;
         if (startingDialogue.Length != 0)
-        {   
+        {
             ogDialogue = gameObject.GetComponent<Dialogue>().sentences;
             gameObject.GetComponent<Dialogue>().sentences = startingDialogue;
         }
@@ -175,7 +175,7 @@ public class QuestGiver : MonoBehaviour
         questAcceptUI.transform.Find("Contents").GetComponent<TextMeshProUGUI>().text = questDesc;
         player.GetComponent<UnityTPS>().questAcceptUI.SetActive(true);
         player.GetComponent<UnityTPS>().setFocusToUI();
-        
+
 
     }
 
@@ -207,7 +207,7 @@ public class QuestGiver : MonoBehaviour
 
                 foreach (var x in objectiveList)
                 {
-                    
+
                     if (x.checkObjectiveState())
                     {
                         questLineText += "Complete | " + x.objectiveDesc + "\n";
@@ -223,6 +223,7 @@ public class QuestGiver : MonoBehaviour
                     // tempDialogueBackupList.Add(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName());
                     if (!x.isDestination)
                     {
+                        
                         dialogueIndex tempDiaIndex = new dialogueIndex();
                         tempDiaIndex.dialogue = x.requiredInteractionObject.GetComponent<Dialogue>().sentences;
                         tempDiaIndex.index = objDialogueIndex;
@@ -271,12 +272,13 @@ public class QuestGiver : MonoBehaviour
 
                     objDialogueIndex++;
 
-                    
+
 
                 }
 
-                for (int i = 0; i < objectiveList.Length; i++){
-                    objectiveList[i].setObjectiveHash("0x"+createRandomHash());
+                for (int i = 0; i < objectiveList.Length; i++)
+                {
+                    objectiveList[i].setObjectiveHash("0x" + createRandomHash());
                 }
 
                 smartContractUI.transform.Find("Questline").GetComponent<TextMeshProUGUI>().text = questLineText;
@@ -303,7 +305,7 @@ public class QuestGiver : MonoBehaviour
                         if (t.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName() == u.Key && objectiveCounter == u.Value.index)
                         {
                             t.requiredInteractionObject.GetComponent<Dialogue>().sentences = u.Value.dialogue;
-                            Debug.Log("Replaced "+t.requiredInteractionObject.name+"'s dialogue.");
+                            Debug.Log("Replaced " + t.requiredInteractionObject.name + "'s dialogue.");
                         }
 
                     }
@@ -334,7 +336,7 @@ public class QuestGiver : MonoBehaviour
                 setQuestAsComplete();
                 questCompleteIndicator.transform.Find("desc").GetComponent<TextMeshProUGUI>().text = questTitle;
                 player.GetComponent<UnityTPS>().fadeInQuestComplete();
-                
+
                 questUI.transform.Find("questName").gameObject.GetComponent<Text>().text = null;
                 questUI.transform.Find("Quest description/objDesc").gameObject.GetComponent<Text>().text = null;
                 smartContractUI.transform.Find("QuestTitle").GetComponent<Text>().text = "No quest active.";
@@ -362,10 +364,11 @@ public class QuestGiver : MonoBehaviour
 
                 }
 
-                if (startingDialogue.Length !=0){
+                if (startingDialogue.Length != 0)
+                {
                     gameObject.GetComponent<Dialogue>().sentences = ogDialogue;
                 }
-                
+
                 dialogueDict.Clear();
                 Destroy(this);
 
@@ -388,7 +391,7 @@ public class QuestGiver : MonoBehaviour
 
                 }
                 else
-                {   
+                {
                     player.GetComponent<UnityTPS>().blocksCreated.Add(objectiveList[objectiveCounter].objectiveHash);
                     objectiveCounter++;
                     designatedMarkerLocation = objectiveList[objectiveCounter].requiredInteractionObject;
@@ -452,22 +455,23 @@ public class QuestGiver : MonoBehaviour
         return isComplete;
     }
 
-    
 
-    public string createRandomHash(){
+
+    public string createRandomHash()
+    {
         var chars = "abcdef0123456789";
         char[] stringChars;
-        
+
         stringChars = new char[8];
-        
+
         for (int i = 0; i < stringChars.Length; i++)
         {
-            stringChars[i] = chars[UnityEngine.Random.Range(0,chars.Length)];
+            stringChars[i] = chars[UnityEngine.Random.Range(0, chars.Length)];
         }
         var finalString = "";
         finalString = new string(stringChars);
 
-        Debug.Log("Generated new hash: "+finalString);
+        Debug.Log("Generated new hash: " + finalString);
 
         return finalString;
     }

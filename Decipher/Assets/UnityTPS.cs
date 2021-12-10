@@ -89,6 +89,9 @@ public class UnityTPS : MonoBehaviour
 
     public bool starterDialogue;
 
+    private GameObject[] uiElements;
+    public bool uiHidden;
+
 
     [Header("Gravity")]
     [SerializeField] private bool gravityCheck;
@@ -124,6 +127,7 @@ public class UnityTPS : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         currentGameObject = new GameObject();
         allowMove = false;
+        uiHidden = false;
 
         questUI.SetActive(false);
         livesRepUI.SetActive(false);
@@ -138,7 +142,7 @@ public class UnityTPS : MonoBehaviour
         StartCoroutine(removeQuestCompleteUI());
         // StartCoroutine(changeIdleBlendValue());
 
-
+        uiElements = GameObject.FindGameObjectsWithTag("UI");
 
         float dialogueIndicatorYSize = dialogueIndicator.transform.Find("dialogueBox").GetComponent<RectTransform>().sizeDelta.y;
         dialogueIndicator.transform.Find("dialogueBox").GetComponent<RectTransform>().sizeDelta = new Vector2(2 * Screen.width, dialogueIndicatorYSize);
@@ -161,6 +165,7 @@ public class UnityTPS : MonoBehaviour
         npcNameWTSP();
         updateDay();
         callSmartContractUI();
+        setUIVisibility();
 
 
 
@@ -175,8 +180,6 @@ public class UnityTPS : MonoBehaviour
     {
         updateReputation();
         lulw();
-        
-
     }
 
     public void lulw()
@@ -455,7 +458,9 @@ public class UnityTPS : MonoBehaviour
                             {
                                 currentQuest.displayQuestAcceptUI();
                             }
-                        } catch (Exception e){
+                        }
+                        catch (Exception e)
+                        {
 
                         }
 
@@ -546,18 +551,19 @@ public class UnityTPS : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void fadeInQuestComplete(){
+    public void fadeInQuestComplete()
+    {
         questCompleteIndicator.SetActive(true);
-        
+
         //set opacity to 0
-        questCompleteIndicator.transform.Find("complete").GetComponent<Text>().CrossFadeAlpha(0f,0f,false);
-        questCompleteIndicator.transform.Find("desc").GetComponent<TextMeshProUGUI>().CrossFadeAlpha(0f,0f,false);
-        questCompleteIndicator.transform.Find("shadow").GetComponent<RawImage>().CrossFadeAlpha(0f,0f,false);
+        questCompleteIndicator.transform.Find("complete").GetComponent<Text>().CrossFadeAlpha(0f, 0f, false);
+        questCompleteIndicator.transform.Find("desc").GetComponent<TextMeshProUGUI>().CrossFadeAlpha(0f, 0f, false);
+        questCompleteIndicator.transform.Find("shadow").GetComponent<RawImage>().CrossFadeAlpha(0f, 0f, false);
 
         //fade in to 1
-        questCompleteIndicator.transform.Find("complete").GetComponent<Text>().CrossFadeAlpha(1f,1f,false);
-        questCompleteIndicator.transform.Find("desc").GetComponent<TextMeshProUGUI>().CrossFadeAlpha(1f,1f,false);
-        questCompleteIndicator.transform.Find("shadow").GetComponent<RawImage>().CrossFadeAlpha(1f,1f,false);
+        questCompleteIndicator.transform.Find("complete").GetComponent<Text>().CrossFadeAlpha(1f, 1f, false);
+        questCompleteIndicator.transform.Find("desc").GetComponent<TextMeshProUGUI>().CrossFadeAlpha(1f, 1f, false);
+        questCompleteIndicator.transform.Find("shadow").GetComponent<RawImage>().CrossFadeAlpha(1f, 1f, false);
 
     }
 
@@ -604,9 +610,10 @@ public class UnityTPS : MonoBehaviour
 
                 }
 
-                if (!questCompleteIndicator.activeSelf){
+                if (!questCompleteIndicator.activeSelf)
+                {
                     fadeUI.SetActive(true);
-                } 
+                }
 
             }
         }
@@ -679,10 +686,53 @@ public class UnityTPS : MonoBehaviour
         }
     }
 
+    public void disableUI()
+    {
+
+        foreach (var x in uiElements)
+        {
+            x.SetActive(false);
+        }
+
+    }
+
+    public void enableUI()
+    {
+
+        foreach (var x in uiElements)
+        {
+            x.SetActive(true);
+        }
+
+    }
+
+
+    public void setUIVisibility()
+    {
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (uiHidden)
+            {
+                enableUI();
+                uiHidden = !uiHidden;
+            }
+            else
+            {
+                disableUI();
+                uiHidden = !uiHidden;
+            }
+
+        }
+
+    }
+
+
+
     IEnumerator removeQuestCompleteUI()
     {
         for (; ; )
-        {   
+        {
             // Debug.Log("Performing coroutine quest complete UI check.");
             yield return new WaitForSeconds(2f);
             if (questCompleteIndicator.activeSelf)

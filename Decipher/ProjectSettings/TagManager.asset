@@ -10,6 +10,7 @@ TagManager:
   - Land
   - NPCTag
   - Trigger
+  - UI
   layers:
   - Default
   - TransparentFX
