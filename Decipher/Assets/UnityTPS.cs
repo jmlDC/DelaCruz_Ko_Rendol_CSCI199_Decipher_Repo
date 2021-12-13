@@ -22,20 +22,21 @@ public class UnityTPS : MonoBehaviour
     public Vector3 offset;
 
     [Header("Main Settings")]
+
+    public Vector3 originPosition;
     public GameObject currentUIIndicator;
     public GameObject dialogueIndicator;
     public GameObject livesRepUI;
-
     public GameObject persistentUI;
     public GameObject pubDesUI;
     public GameObject designatedBoard;
     public GameObject questUI;
-
     public GameObject questAcceptUI;
     public GameObject fadeUI;
     public GameObject smartContractUI;
-
     public GameObject introUI;
+    
+    public GameObject cryptoUI;
 
     public GameObject questCompleteIndicator;
 
@@ -138,6 +139,7 @@ public class UnityTPS : MonoBehaviour
         questAcceptUI.SetActive(false);
         smartContractUI.SetActive(false);
         questCompleteIndicator.SetActive(false);
+        cryptoUI.SetActive(false);
         initializeNPCTags();
         StartCoroutine(removeQuestCompleteUI());
         // StartCoroutine(changeIdleBlendValue());
@@ -166,6 +168,7 @@ public class UnityTPS : MonoBehaviour
         updateDay();
         callSmartContractUI();
         setUIVisibility();
+        
 
 
 
@@ -356,6 +359,9 @@ public class UnityTPS : MonoBehaviour
                         allowMove = true;
                         fadeUI.SetActive(false);
                         dayChangeState = false;
+
+
+
                         afterDayDialogueCounter = 0;
                         day += 1;
                         completedQuestsDay.Clear();
@@ -645,7 +651,7 @@ public class UnityTPS : MonoBehaviour
 
     public void resetPlayerPosition()
     {
-        Vector3 originPosition = new Vector3(85, 0.55f, 65);
+        // Vector3 originPosition = new Vector3(85, 0.55f, 65);
         controller.transform.position = originPosition;
     }
 

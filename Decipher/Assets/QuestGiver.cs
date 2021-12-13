@@ -8,8 +8,7 @@ public class QuestGiver : MonoBehaviour
 {
 
     public CharacterController player;
-    [SerializeField]
-    public int optionalPriorityCount;
+
 
 
     private GameObject questUI;
@@ -19,12 +18,20 @@ public class QuestGiver : MonoBehaviour
 
     private GameObject questAcceptUI;
 
+    private GameObject cryptoUI;
+
     [SerializeField]
     public string questTitle;
     [SerializeField]
     public string questDesc;
 
     private string questLineText;
+
+    [SerializeField]
+
+    private bool cryptoQuest;
+    [SerializeField]
+    private string startQuestKaching;
 
     [SerializeField]
     public string[] startingDialogue;
@@ -44,6 +51,7 @@ public class QuestGiver : MonoBehaviour
 
     [SerializeField]
     public int reputationReward;
+
 
     public int objectiveCounter;
 
@@ -69,6 +77,7 @@ public class QuestGiver : MonoBehaviour
         smartContractUI = player.GetComponent<UnityTPS>().smartContractUI;
         questAcceptUI = player.GetComponent<UnityTPS>().questAcceptUI;
         questCompleteIndicator = player.GetComponent<UnityTPS>().questCompleteIndicator;
+        cryptoUI = player.GetComponent<UnityTPS>().cryptoUI;
 
     }
 
@@ -182,6 +191,25 @@ public class QuestGiver : MonoBehaviour
 
     public void startQuestUI()
     {
+        if (cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text == "X" && (startQuestKaching == "" || startQuestKaching == "0"))
+        {
+            cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text = "0";
+        }
+        else if (!(startQuestKaching == "" || startQuestKaching == "0"))
+        {
+            if (cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text != "0")
+            {
+                cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text = (System.Int32.Parse(cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text) + System.Int32.Parse(startQuestKaching)).ToString();
+            }
+            else
+            {
+                cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text = startQuestKaching;
+            }
+        }  
+
+        if (cryptoQuest){
+            cryptoUI.SetActive(true);
+        }
 
         Debug.Log(objectiveCounter + 1 + " | " + objectiveList.Length);
         objectiveCounter = 0;
@@ -223,7 +251,7 @@ public class QuestGiver : MonoBehaviour
                     // tempDialogueBackupList.Add(x.requiredInteractionObject.GetComponent<Dialogue>().returnGameObjectName());
                     if (!x.isDestination)
                     {
-                        
+
                         dialogueIndex tempDiaIndex = new dialogueIndex();
                         tempDiaIndex.dialogue = x.requiredInteractionObject.GetComponent<Dialogue>().sentences;
                         tempDiaIndex.index = objDialogueIndex;
@@ -330,9 +358,23 @@ public class QuestGiver : MonoBehaviour
             Debug.Log("Current quest is set up to finish.");
             if (parentConvoTrackerState)
             {
+                if (!(objectiveList[objectiveCounter].optionalKaching.ToString() == "" || objectiveList[objectiveCounter].optionalKaching.ToString() == "0"))
+                {
+                    cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text = (System.Int32.Parse(cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text) - objectiveList[objectiveCounter].optionalKaching).ToString();
+                }
                 Debug.Log("Quest is complete!");
-                player.GetComponent<UnityTPS>().blocksCreated.Add(objectiveList[objectiveCounter].objectiveHash);
+                if (player.GetComponent<UnityTPS>().day < 10)
+                {
+                    player.GetComponent<UnityTPS>().blocksCreated.Add("0" + player.GetComponent<UnityTPS>().day + objectiveList[objectiveCounter].objectiveHash);
+                }
+                else
+                {
+                    player.GetComponent<UnityTPS>().blocksCreated.Add(player.GetComponent<UnityTPS>().day + objectiveList[objectiveCounter].objectiveHash);
+                }
                 questUI.SetActive(false);
+                if(cryptoUI.activeSelf){
+                    cryptoUI.SetActive(false);
+                }
                 setQuestAsComplete();
                 questCompleteIndicator.transform.Find("desc").GetComponent<TextMeshProUGUI>().text = questTitle;
                 player.GetComponent<UnityTPS>().fadeInQuestComplete();
@@ -377,13 +419,25 @@ public class QuestGiver : MonoBehaviour
         else if (objectiveCounter + 1 < objectiveList.Length)
         {
             Debug.Log("Quest is ongoing!");
+            if (!(objectiveList[objectiveCounter].optionalKaching.ToString() == "" || objectiveList[objectiveCounter].optionalKaching.ToString() == "0"))
+            {
+                cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text = (System.Int32.Parse(cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text) - objectiveList[objectiveCounter].optionalKaching).ToString();
+            }
             if (objectiveList[objectiveCounter].checkObjectiveState())
             {
                 if (!questAnchoredToPlayer)
                 {
                     if (parentConvoTrackerState)
                     {
-                        player.GetComponent<UnityTPS>().blocksCreated.Add(objectiveList[objectiveCounter].objectiveHash);
+                        if (player.GetComponent<UnityTPS>().day < 10)
+                        {
+                            player.GetComponent<UnityTPS>().blocksCreated.Add("0" + player.GetComponent<UnityTPS>().day + objectiveList[objectiveCounter].objectiveHash);
+                        }
+                        else
+                        {
+                            player.GetComponent<UnityTPS>().blocksCreated.Add(player.GetComponent<UnityTPS>().day + objectiveList[objectiveCounter].objectiveHash);
+                        }
+
                         objectiveCounter++;
                         designatedMarkerLocation = objectiveList[objectiveCounter].requiredInteractionObject;
                         questUI.transform.Find("Quest description/objDesc").gameObject.GetComponent<Text>().text = objectiveList[objectiveCounter].objectiveDesc;
@@ -392,7 +446,14 @@ public class QuestGiver : MonoBehaviour
                 }
                 else
                 {
-                    player.GetComponent<UnityTPS>().blocksCreated.Add(objectiveList[objectiveCounter].objectiveHash);
+                    if (player.GetComponent<UnityTPS>().day < 10)
+                    {
+                        player.GetComponent<UnityTPS>().blocksCreated.Add("0" + player.GetComponent<UnityTPS>().day + objectiveList[objectiveCounter].objectiveHash);
+                    }
+                    else
+                    {
+                        player.GetComponent<UnityTPS>().blocksCreated.Add(player.GetComponent<UnityTPS>().day + objectiveList[objectiveCounter].objectiveHash);
+                    }
                     objectiveCounter++;
                     designatedMarkerLocation = objectiveList[objectiveCounter].requiredInteractionObject;
                     // Debug.Log(objectiveList[objectiveCounter].objectiveDesc);

@@ -22,6 +22,8 @@ public class Objective
 
     public string objectiveHash;
 
+    public float optionalKaching;
+
     public void changeObjectState()
     {
         changedObject.SetActive(!trueForDisappear);

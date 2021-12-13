@@ -57,7 +57,7 @@ public class PubDesScript : MonoBehaviour
             blockString = "";
 
             foreach (var block in player.GetComponent<UnityTPS>().blocksCreated){
-                stringToAdd2 = "Block "+block+"\n";
+                stringToAdd2 = "Day "+block.Substring(0,2)+" | Block "+block.Substring(2)+"\n";
                 if (!localCopyBlock.Contains(stringToAdd2)){
                     localCopyBlock.Add(stringToAdd2);
                 }
