@@ -31755,7 +31755,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778370980}
-  m_LocalRotation: {x: -0.054586604, y: 0.6673921, z: 0.049159244, w: 0.7410746}
+  m_LocalRotation: {x: -0.05458659, y: 0.6673921, z: 0.04915923, w: 0.7410746}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -35871,7 +35871,7 @@ MonoBehaviour:
     isAccomplished: 0
     customDialogue:
     - (Each coffee is worth 4 Kaching)
-    - (You buy 4 of them for each of your coworkers)
+    - (You buy 4 of them, one for each of your coworkers)
     objectiveHash: 
     optionalKaching: 16
   - objectiveDesc: Give coffee to Yuuichi
@@ -35916,7 +35916,7 @@ MonoBehaviour:
     changedObject: {fileID: 0}
     trueForDisappear: 0
     isDestination: 0
-    isAccomplished: 1
+    isAccomplished: 0
     customDialogue:
     - (You give the coffee to Hanako.)
     - Oh hi! What's that? Coffee? Thanks!
@@ -47802,7 +47802,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167162848}
-  m_LocalRotation: {x: -0.05458659, y: 0.6673921, z: 0.04915923, w: 0.7410746}
+  m_LocalRotation: {x: -0.05458661, y: 0.6673921, z: 0.049159247, w: 0.7410746}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -68277,7 +68277,7 @@ MonoBehaviour:
   uiCamera: {fileID: 1643155534}
   waypointMarker: {fileID: 1615403451}
   offset: {x: 0, y: 1, z: 0}
-  originPosition: {x: 97, y: 0.66, z: 75}
+  originPosition: {x: 97.5, y: 0.66, z: 76.7}
   currentUIIndicator: {fileID: 2053709996}
   dialogueIndicator: {fileID: 1135579415}
   livesRepUI: {fileID: 1821245744}
