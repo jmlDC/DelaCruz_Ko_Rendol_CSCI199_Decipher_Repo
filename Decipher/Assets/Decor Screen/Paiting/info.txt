@@ -1,0 +1,11 @@
+Name: kartina015
+Version: 2014
+Preview: Yes
+Units: Millimeters
+Dimension: 1128.75 x 12.07 x 1695.81
+Polys: 289
+XForm: Yes
+Box Trick: Yes
+Model Parts: 1
+Render: Corona
+Formats: 3Ds Max 2014, OBJ, FBX

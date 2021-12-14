@@ -205,9 +205,10 @@ public class QuestGiver : MonoBehaviour
             {
                 cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text = startQuestKaching;
             }
-        }  
+        }
 
-        if (cryptoQuest){
+        if (cryptoQuest)
+        {
             cryptoUI.SetActive(true);
         }
 
@@ -372,7 +373,8 @@ public class QuestGiver : MonoBehaviour
                     player.GetComponent<UnityTPS>().blocksCreated.Add(player.GetComponent<UnityTPS>().day + objectiveList[objectiveCounter].objectiveHash);
                 }
                 questUI.SetActive(false);
-                if(cryptoUI.activeSelf){
+                if (cryptoUI.activeSelf)
+                {
                     cryptoUI.SetActive(false);
                 }
                 setQuestAsComplete();
@@ -419,10 +421,7 @@ public class QuestGiver : MonoBehaviour
         else if (objectiveCounter + 1 < objectiveList.Length)
         {
             Debug.Log("Quest is ongoing!");
-            if (!(objectiveList[objectiveCounter].optionalKaching.ToString() == "" || objectiveList[objectiveCounter].optionalKaching.ToString() == "0"))
-            {
-                cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text = (System.Int32.Parse(cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text) - objectiveList[objectiveCounter].optionalKaching).ToString();
-            }
+
             if (objectiveList[objectiveCounter].checkObjectiveState())
             {
                 if (!questAnchoredToPlayer)
@@ -436,6 +435,11 @@ public class QuestGiver : MonoBehaviour
                         else
                         {
                             player.GetComponent<UnityTPS>().blocksCreated.Add(player.GetComponent<UnityTPS>().day + objectiveList[objectiveCounter].objectiveHash);
+                        }
+
+                        if (!(objectiveList[objectiveCounter].optionalKaching.ToString() == "" || objectiveList[objectiveCounter].optionalKaching.ToString() == "0"))
+                        {
+                            cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text = (System.Int32.Parse(cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text) - objectiveList[objectiveCounter].optionalKaching).ToString();
                         }
 
                         objectiveCounter++;
