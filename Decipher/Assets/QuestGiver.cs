@@ -319,10 +319,8 @@ public class QuestGiver : MonoBehaviour
 
     }
 
-    public void updateQuestUI()
+    public void updateNPCDialogue()
     {
-        questLineText = null;
-        Debug.Log(objectiveCounter + 1 + " | " + objectiveList.Length);
         if (customDialogueDict.Count != 0)
         {
             foreach (var t in objectiveList)
@@ -341,6 +339,20 @@ public class QuestGiver : MonoBehaviour
 
                 }
 
+            }
+        }
+    }
+
+    public void updateQuestUI()
+    {
+        questLineText = null;
+        Debug.Log(objectiveCounter + 1 + " | " + objectiveList.Length);
+
+
+        foreach (var t in objectiveList)
+        {
+            if (!t.isDestination)
+            {
                 if (t.checkObjectiveState())
                 {
                     questLineText += "Complete | " + t.objectiveDesc + "\n";
@@ -349,10 +361,9 @@ public class QuestGiver : MonoBehaviour
                 {
                     questLineText += "Pending | " + t.objectiveDesc + "\n";
                 }
-
             }
-        }
 
+        }
 
         if (objectiveCounter + 1 == objectiveList.Length)
         {

@@ -423,6 +423,7 @@ public class UnityTPS : MonoBehaviour
                                     {
                                         questList[0].copyStartingDialogue();
                                         currentQuest = questList[0];
+                                        Debug.Log("Changed object starting dialogue.");
 
                                     }
 
@@ -432,8 +433,13 @@ public class UnityTPS : MonoBehaviour
                             // }
                         }
 
+                        if (currentQuest != null)
+                        {
+                            currentQuest.updateNPCDialogue();
+                        }
 
                         dialogueIndicator.SetActive(true);
+                        Debug.Log("Dialogue UI set active");
                         // dialogueIndicator.transform.Find("ObjectName").gameObject.GetComponent<Text>().text = limaw;
                         if (currentGameObject.GetComponent<Dialogue>().returnDialogue().Length > dialogueCounter)
                         {
