@@ -35,8 +35,9 @@ public class UnityTPS : MonoBehaviour
     public GameObject fadeUI;
     public GameObject smartContractUI;
     public GameObject introUI;
-    
     public GameObject cryptoUI;
+    public GameObject computerUI;
+    public GameObject designatedKeyboard;
 
     public GameObject questCompleteIndicator;
 
@@ -140,6 +141,7 @@ public class UnityTPS : MonoBehaviour
         smartContractUI.SetActive(false);
         questCompleteIndicator.SetActive(false);
         cryptoUI.SetActive(false);
+        computerUI.SetActive(false);
         initializeNPCTags();
         StartCoroutine(removeQuestCompleteUI());
         // StartCoroutine(changeIdleBlendValue());
@@ -168,7 +170,7 @@ public class UnityTPS : MonoBehaviour
         updateDay();
         callSmartContractUI();
         setUIVisibility();
-        
+
 
 
 
@@ -457,6 +459,12 @@ public class UnityTPS : MonoBehaviour
                                 pubDesUI.GetComponent<PubDesScript>().pubDesConsolidatedMethod();
                                 setFocusToUI();
                             }
+                            else if (currentGameObject == designatedKeyboard)
+                            {
+                                computerUI.SetActive(true);
+                                computerUI.GetComponent<ComputerMinigameScript>().solutionIsAchieved = true;
+                                setFocusToUI();
+                            }
 
                             // dialogueIndicator.transform.Find("ObjectName").gameObject.GetComponent<Text>().text = null;
                             dialogueIndicator.SetActive(false);
@@ -482,11 +490,21 @@ public class UnityTPS : MonoBehaviour
                             currentQuest.setCurrentConvoTracker(currentConversationEnd);
                             if (currentQuest.returnIndicatedGameObject() == currentGameObject)
                             {
-                                Debug.Log("Update quest condition met.");
-                                currentQuest.returnCurrentObjective().setAccomplishedState();
-                                currentQuest.updateQuestUI();
-                                currentConversationEnd = false;
+                                if (currentGameObject == designatedKeyboard)
+                                {
+                                    Debug.Log("KB QUEST condition met.");
+                                    currentConversationEnd = false;
+                                }
+                                else if (currentGameObject != designatedKeyboard)
+                                {
+                                    Debug.Log("Update quest condition met.");
+                                    currentQuest.returnCurrentObjective().setAccomplishedState();
+                                    currentQuest.updateQuestUI();
+                                    currentConversationEnd = false;
+                                }
+
                             }
+
 
                         }
 

@@ -161,6 +161,18 @@ public class QuestGiver : MonoBehaviour
                     }
 
                 }
+
+                if (objectiveList[objectiveCounter].requiredInteractionObject == player.GetComponent<UnityTPS>().designatedKeyboard){
+
+                    if (player.GetComponent<UnityTPS>().computerUI.GetComponent<ComputerMinigameScript>().puzzleSolved && player.GetComponent<UnityTPS>().computerUI.activeSelf == false){
+                        Debug.Log(">>>>> Solution is accepted, puzzle is therefore solved.");
+                        
+                        player.GetComponent<UnityTPS>().computerUI.GetComponent<ComputerMinigameScript>().puzzleSolved = false;
+                        objectiveList[objectiveCounter].setAccomplishedState();
+                        updateQuestUI();
+                    }
+
+                }
             }
 
         }

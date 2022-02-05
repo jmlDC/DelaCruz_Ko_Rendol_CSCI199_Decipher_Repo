@@ -414,10 +414,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -565,9 +567,9 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 1834013138629758723}
   m_AABB:
-    m_Center: {x: 0.00053974986, y: 0.7869718, z: 0.022722237}
-    m_Extent: {x: 0.64456916, y: 0.78661895, z: 0.12196348}
-  m_DirtyAABB: 0
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_DirtyAABB: 1
 --- !u!1 &1535474865251413294
 GameObject:
   m_ObjectHideFlags: 0
@@ -3050,10 +3052,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3258,9 +3262,9 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 1834013138629758723}
   m_AABB:
-    m_Center: {x: 0.008054227, y: 1.4857066, z: 0.009526126}
-    m_Extent: {x: 0.11483757, y: 0.118475795, z: 0.12118582}
-  m_DirtyAABB: 0
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_DirtyAABB: 1
 --- !u!1 &6552817647191556654
 GameObject:
   m_ObjectHideFlags: 0
@@ -4616,10 +4620,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4769,9 +4775,9 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 1834013138629758723}
   m_AABB:
-    m_Center: {x: 0.00052690506, y: 1.4538441, z: 0.04707031}
-    m_Extent: {x: 0.09302209, y: 0.10525513, z: 0.061458834}
-  m_DirtyAABB: 0
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_DirtyAABB: 1
 --- !u!1 &8574904983062057770
 GameObject:
   m_ObjectHideFlags: 0
