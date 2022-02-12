@@ -67,6 +67,7 @@ public class UnityTPS : MonoBehaviour
 
     [Header("Gameplay stats")]
     public int currentReputation;
+    public float dialogueTimer;
 
     [Header("Movement")]
     [SerializeField] public bool allowMove;
@@ -88,6 +89,8 @@ public class UnityTPS : MonoBehaviour
 
     [Header("Interaction query")]
     [SerializeField] public string currentInteractable;
+
+    public GameObject dialogueProgressImage;
 
     public bool starterDialogue;
 
@@ -142,6 +145,7 @@ public class UnityTPS : MonoBehaviour
         questCompleteIndicator.SetActive(false);
         cryptoUI.SetActive(false);
         computerUI.SetActive(false);
+        dialogueProgressImage.SetActive(false);
         initializeNPCTags();
         StartCoroutine(removeQuestCompleteUI());
         // StartCoroutine(changeIdleBlendValue());
@@ -170,6 +174,7 @@ public class UnityTPS : MonoBehaviour
         updateDay();
         callSmartContractUI();
         setUIVisibility();
+        dialogueTimerMethod();
 
 
 
@@ -185,6 +190,27 @@ public class UnityTPS : MonoBehaviour
     {
         updateReputation();
         lulw();
+    }
+
+    void dialogueTimerMethod()
+    {
+        if (dialogueTimer > 0)
+        {
+            dialogueTimer -= Time.deltaTime;
+        }
+
+        if (dialogueIndicator.activeSelf && dialogueTimer <= 0)
+        {
+            dialogueProgressImage.SetActive(true);
+        }
+        else if (dialogueIndicator.activeSelf && dialogueTimer > 0)
+        {
+            dialogueProgressImage.SetActive(false);
+        }
+        else if (!dialogueIndicator.activeSelf)
+        {
+            dialogueProgressImage.SetActive(false);
+        }
     }
 
     public void lulw()
@@ -407,7 +433,7 @@ public class UnityTPS : MonoBehaviour
                     //     // Debug.Log("This object can provide a quest.");
                     // }
 
-                    if (Input.GetKeyDown(KeyCode.E) && !Cursor.visible)
+                    if (Input.GetKeyDown(KeyCode.E) && !Cursor.visible && dialogueTimer <= 0)
                     {
 
 
@@ -443,8 +469,20 @@ public class UnityTPS : MonoBehaviour
                         dialogueIndicator.SetActive(true);
                         Debug.Log("Dialogue UI set active");
                         // dialogueIndicator.transform.Find("ObjectName").gameObject.GetComponent<Text>().text = limaw;
+
+
+
+
+
                         if (currentGameObject.GetComponent<Dialogue>().returnDialogue().Length > dialogueCounter)
                         {
+
+                            dialogueTimer = (float)(currentGameObject.GetComponent<Dialogue>().returnDialogue()[dialogueCounter].Length / 28);
+                            if (dialogueTimer < 1)
+                            {
+                                dialogueTimer = 1f;
+                            }
+
                             Debug.Log("Message:" + currentGameObject.GetComponent<Dialogue>().returnDialogue()[dialogueCounter]);
                             dialogueIndicator.transform.Find("DialogueText").gameObject.GetComponent<Text>().text = currentGameObject.GetComponent<Dialogue>().returnDialogue()[dialogueCounter];
                             dialogueCounter++;
@@ -452,7 +490,27 @@ public class UnityTPS : MonoBehaviour
                         }
                         else
                         {
-                            Debug.Log("End of conversation with " + dialogueIndicator.transform.Find("ObjectName").gameObject.GetComponent<Text>().text);
+                            Debug.Log("End of conversation with " + currentGameObject.name);
+
+                            try
+                            {Debug.Log(currentQuest.objectiveList[currentQuest.objectiveCounter].requiredInteractionObject.name + " | " + currentQuest.objectiveList[currentQuest.objectiveCounter].isVirtualPuzzleObjective);
+                            } catch (Exception e){
+                            }
+
+                            
+                            try
+                            {
+                                if (currentGameObject.name == currentQuest.objectiveList[currentQuest.objectiveCounter].requiredInteractionObject.name && currentQuest.objectiveList[currentQuest.objectiveCounter].isVirtualPuzzleObjective)
+                                {
+                                    controller.transform.position = new Vector3(74, 1, 97);
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Debug.Log("No quest applied.");
+                            }
+
+
                             if (currentGameObject == designatedBoard)
                             {
                                 pubDesUI.SetActive(true);

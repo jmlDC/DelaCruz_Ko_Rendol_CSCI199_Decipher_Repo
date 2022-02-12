@@ -71,6 +71,7 @@ public class QuestGiver : MonoBehaviour
 
     public GameObject designatedMarkerLocation;
 
+
     void Start()
     {
         questUI = player.GetComponent<UnityTPS>().questUI;
@@ -111,6 +112,16 @@ public class QuestGiver : MonoBehaviour
                 {
                     waypointPosition.x = minX;
                 }
+            }
+
+            if (objectiveList[objectiveCounter].isVirtualPuzzleObjective){
+                questUI.transform.Find("Marker").gameObject.SetActive(false);
+                questUI.transform.Find("uiDistance").gameObject.SetActive(false);
+                questUI.transform.Find("uiMarker").gameObject.SetActive(false);
+            } else {
+                questUI.transform.Find("Marker").gameObject.SetActive(true);
+                questUI.transform.Find("uiDistance").gameObject.SetActive(true);
+                questUI.transform.Find("uiMarker").gameObject.SetActive(true);
             }
 
             waypointPosition.x = Mathf.Clamp(waypointPosition.x, minX, maxX);
@@ -319,7 +330,12 @@ public class QuestGiver : MonoBehaviour
 
                 for (int i = 0; i < objectiveList.Length; i++)
                 {
-                    objectiveList[i].setObjectiveHash("0x" + createRandomHash());
+                    if (objectiveList[i].isVirtualPuzzleObjective){
+                        objectiveList[i].setObjectiveHash("COMPLETED VIRTUAL PUZZLE");
+                    } else {
+                        objectiveList[i].setObjectiveHash("0x" + createRandomHash());
+                    }
+                        
                 }
 
                 smartContractUI.transform.Find("Questline").GetComponent<TextMeshProUGUI>().text = questLineText;
@@ -465,6 +481,14 @@ public class QuestGiver : MonoBehaviour
                             cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text = (System.Int32.Parse(cryptoUI.transform.Find("uiKaching").gameObject.GetComponent<Text>().text) - objectiveList[objectiveCounter].optionalKaching).ToString();
                         }
 
+                        if (objectiveList[objectiveCounter].isVirtualPuzzleObjective && player.GetComponent<UnityTPS>().dialogueProgressImage.activeSelf){
+                            Debug.Log(">>>>>>>>>>>> AAAAAAAAAAAAAAAAAAAA");
+                            
+                            
+                        }
+
+                      
+
                         objectiveCounter++;
                         designatedMarkerLocation = objectiveList[objectiveCounter].requiredInteractionObject;
                         questUI.transform.Find("Quest description/objDesc").gameObject.GetComponent<Text>().text = objectiveList[objectiveCounter].objectiveDesc;
@@ -481,6 +505,12 @@ public class QuestGiver : MonoBehaviour
                     {
                         player.GetComponent<UnityTPS>().blocksCreated.Add(player.GetComponent<UnityTPS>().day + objectiveList[objectiveCounter].objectiveHash);
                     }
+
+                    if (objectiveList[objectiveCounter].isVirtualPuzzleObjective && player.GetComponent<UnityTPS>().dialogueProgressImage.activeSelf){
+                            Debug.Log(">>>>>>>>>>>> eto pag naka anchor sa player yung quest");
+                            // player.GetComponent<UnityTPS>().controller.transform.position =  new Vector3(74,1,97);
+                    }
+
                     objectiveCounter++;
                     designatedMarkerLocation = objectiveList[objectiveCounter].requiredInteractionObject;
                     // Debug.Log(objectiveList[objectiveCounter].objectiveDesc);

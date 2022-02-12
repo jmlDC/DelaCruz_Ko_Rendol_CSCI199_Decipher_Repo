@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class ComputerMinigameScript : MonoBehaviour
 {   
@@ -13,6 +14,7 @@ public class ComputerMinigameScript : MonoBehaviour
     public bool solutionIsAchieved;
 
     public TextMeshProUGUI thisTextBox;
+    public TextMeshProUGUI taskDesc;
 
     void Start(){
         puzzleSolved = false;
@@ -20,20 +22,45 @@ public class ComputerMinigameScript : MonoBehaviour
     }
 
     void Update(){
+        try{
+            if (player.GetComponent<UnityTPS>().currentQuest.returnCurrentObjective().requiredInteractionObject == player.GetComponent<UnityTPS>().designatedKeyboard){
 
+            
+            thisTextBox.text = "Welcome to blockchain overview simulation.";
+            taskDesc.text = player.GetComponent<UnityTPS>().currentQuest.returnCurrentObjective().virtualObjectiveDescription;
 
-        if (player.GetComponent<UnityTPS>().currentQuest.returnCurrentObjective().requiredInteractionObject == player.GetComponent<UnityTPS>().designatedKeyboard){
-            thisTextBox.text = "Hello there!!";
             player.GetComponent<UnityTPS>().computerUI.transform.Find("MonitorScreen/Window/AcceptButton").gameObject.SetActive(true);
+            player.GetComponent<UnityTPS>().computerUI.transform.Find("MonitorScreen/Window/taskInstruction").gameObject.SetActive(true);
+            player.GetComponent<UnityTPS>().computerUI.transform.Find("MonitorScreen/Window/taskDescription").gameObject.SetActive(true);
 
         } else {
             thisTextBox.text = "This is not part of your current objective!!!";
             puzzleSolved = false;
             solutionIsAchieved = false;
+            player.GetComponent<UnityTPS>().computerUI.transform.Find("MonitorScreen/Window/taskInstruction").gameObject.SetActive(false);
+            player.GetComponent<UnityTPS>().computerUI.transform.Find("MonitorScreen/Window/taskDescription").gameObject.SetActive(false);
             player.GetComponent<UnityTPS>().computerUI.transform.Find("MonitorScreen/Window/AcceptButton").gameObject.SetActive(false);
         }
+        } catch (Exception e){
+
+        }
+        
     }
 
+
+
+    public void miniGame(int a){
+
+        switch (a){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+            
+    }
 
     public void checkAnswer(){
         
@@ -41,6 +68,9 @@ public class ComputerMinigameScript : MonoBehaviour
         if (solutionIsAchieved){
             puzzleSolved = true;
             player.GetComponent<UnityTPS>().computerUI.SetActive(false);
+            // player.GetComponent<UnityTPS>().controller.transform.position = new Vector3(320,2,285);
+
+            player.GetComponent<UnityTPS>().controller.transform.position = player.GetComponent<UnityTPS>().currentQuest.returnCurrentObjective().setTeleportPosition;
         }
         player.GetComponent<UnityTPS>().setFocusToGame();
 

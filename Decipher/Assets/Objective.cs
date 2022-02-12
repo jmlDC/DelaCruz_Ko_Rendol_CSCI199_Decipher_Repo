@@ -18,11 +18,23 @@ public class Objective
 
     public bool isAccomplished;
 
+    [Header("Virtual Puzzle Settings")]
+    public bool isVirtualPuzzleObjective;
+
+    public string virtualObjectiveDescription;
+
+    public Vector3 setTeleportPosition;
+
+    [Header("Other")]
+
     public string[] customDialogue;
 
     public string objectiveHash;
 
     public float optionalKaching;
+
+
+
 
     public void changeObjectState()
     {
@@ -59,6 +71,7 @@ public class Objective
             changeObjectState();
         }
     }
+
 
     public void setObjectiveHash(string hash){
         objectiveHash = hash;
