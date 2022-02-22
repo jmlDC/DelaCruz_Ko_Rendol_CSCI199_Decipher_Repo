@@ -437,6 +437,9 @@ public class UnityTPS : MonoBehaviour
                     {
 
 
+
+
+
                         if (currentGameObject.GetComponent<QuestGiver>() != null)
                         {
                             QuestGiver[] questList = currentGameObject.GetComponents<QuestGiver>();
@@ -493,11 +496,24 @@ public class UnityTPS : MonoBehaviour
                             Debug.Log("End of conversation with " + currentGameObject.name);
 
                             try
-                            {Debug.Log(currentQuest.objectiveList[currentQuest.objectiveCounter].requiredInteractionObject.name + " | " + currentQuest.objectiveList[currentQuest.objectiveCounter].isVirtualPuzzleObjective);
-                            } catch (Exception e){
+                            {
+                                Debug.Log(currentQuest.objectiveList[currentQuest.objectiveCounter].requiredInteractionObject.name + " | " + currentQuest.objectiveList[currentQuest.objectiveCounter].isVirtualPuzzleObjective);
+                            }
+                            catch (Exception e)
+                            {
+                            }
+                            
+                            try
+                            {
+                                if (currentGameObject.GetComponent<TeleporterScript>())
+                                {
+                                    currentGameObject.GetComponent<TeleporterScript>().teleportPlayer();
+                                }
+                            }
+                            catch (Exception e)
+                            {
                             }
 
-                            
                             try
                             {
                                 if (currentGameObject.name == currentQuest.objectiveList[currentQuest.objectiveCounter].requiredInteractionObject.name && currentQuest.objectiveList[currentQuest.objectiveCounter].isVirtualPuzzleObjective)
