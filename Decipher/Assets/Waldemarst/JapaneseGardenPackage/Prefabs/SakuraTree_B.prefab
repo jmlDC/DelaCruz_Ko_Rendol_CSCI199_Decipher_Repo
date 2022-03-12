@@ -51,10 +51,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -80,6 +82,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1242176148977611559
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,10 +125,12 @@ BillboardRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -161,7 +166,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2845441303590335136}
   - component: {fileID: 5044587590099107464}
-  - component: {fileID: 4174242457103700717}
+  - component: {fileID: 9055020389167326506}
   m_Layer: 0
   m_Name: SakuraTree_B
   m_TagString: Untagged
@@ -177,7 +182,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3898220539956852897}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3182510493548175453}
@@ -200,11 +205,11 @@ LODGroup:
   m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.6
+  - screenRelativeHeight: 0.84905785
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 3802229467328562115}
-  - screenRelativeHeight: 0.20000002
+  - screenRelativeHeight: 0.6993672
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 238307967270038636}
@@ -213,7 +218,7 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2063596824955738648}
   m_Enabled: 1
---- !u!136 &4174242457103700717
+--- !u!136 &9055020389167326506
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,9 +229,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 7.06
+  m_Height: 7.19
   m_Direction: 1
-  m_Center: {x: 0, y: 3.13, z: 0}
+  m_Center: {x: 0, y: 3.12, z: 0}
 --- !u!1 &7335006677632143508
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,10 +283,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -307,6 +314,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!21 &21466209151355556
 Material:
   serializedVersion: 6
@@ -338,6 +346,7 @@ Material:
         m_Texture: {fileID: 2800000, guid: baa6fbb098fb365268a7ed4d0f878a25, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _Cull: 2
     - _Cutoff: 0.333
@@ -345,6 +354,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
+  m_BuildTextureStacks: []
 --- !u!21 &21830327254347164
 Material:
   serializedVersion: 6
@@ -376,6 +386,7 @@ Material:
         m_Texture: {fileID: 2800000, guid: 544c853180114ea41ab76d418d8d056e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _Cull: 0
     - _Cutoff: 0.35
@@ -383,6 +394,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _HueVariation: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
 --- !u!21 &21922585442409102
 Material:
   serializedVersion: 6
@@ -410,12 +422,14 @@ Material:
         m_Texture: {fileID: 2800000, guid: 0fa216364cadfa55f9b83ff5c84455a3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
-    - _Cutoff: 0.35
+    - _Cutoff: 0.4
     - _WindQuality: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _HueVariation: {r: 1, g: 1, b: 1, a: 0}
+  m_BuildTextureStacks: []
 --- !u!43 &43151949516474194
 Mesh:
   m_ObjectHideFlags: 0
@@ -586,6 +600,7 @@ Mesh:
   m_MeshMetrics[1]: 1
   m_MeshOptimizationFlags: -1
   m_StreamData:
+    serializedVersion: 2
     offset: 0
     size: 0
     path: 
@@ -759,6 +774,7 @@ Mesh:
   m_MeshMetrics[1]: 1
   m_MeshOptimizationFlags: -1
   m_StreamData:
+    serializedVersion: 2
     offset: 0
     size: 0
     path: 

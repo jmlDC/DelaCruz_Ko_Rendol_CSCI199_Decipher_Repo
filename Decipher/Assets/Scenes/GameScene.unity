@@ -183,11 +183,11 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'GAME DEVELOPED AS PART OF CSCI 199
 
-    (C) DELA CRUZ, KO, RENDOL, 2021.
+    (C) DELA CRUZ, KO, RENDOL, 2022.
 
 
     BUILD
-    20211214'
+    20220312'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b867d8e1abe3fc468274fc1c4c9532e, type: 2}
   m_sharedMaterial: {fileID: -8456997983851548500, guid: 7b867d8e1abe3fc468274fc1c4c9532e,
@@ -16328,7 +16328,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410833480}
-  m_LocalRotation: {x: -0.0057358337, y: 0.6747818, z: 0.0052446607, w: 0.73797643}
+  m_LocalRotation: {x: -0.012921619, y: 0.6690269, z: 0.011634597, w: 0.74303484}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -39501,7 +39501,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 736281375}
-  m_LocalRotation: {x: -0.005735841, y: 0.6747818, z: 0.005244667, w: 0.73797643}
+  m_LocalRotation: {x: -0.012921619, y: 0.6690269, z: 0.011634597, w: 0.74303484}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -41691,7 +41691,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 778370980}
-  m_LocalRotation: {x: -0.04525747, y: 0.6732805, z: 0.04135351, w: 0.7368413}
+  m_LocalRotation: {x: -0.055298828, y: 0.6669438, z: 0.04974629, w: 0.7413861}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -47883,6 +47883,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - Hi there! I'm Hanako. Nice to meet you!
     - I've heard that you're new. Take your time to getting used to around here.
@@ -47899,6 +47901,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - Heya. Megumi here.
     - Hope you're finding the place okay.
@@ -47915,6 +47919,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - Hey there, I'm Yuuichi. Nice to meet you.
     - I'm one of the business analysts in this company.
@@ -47930,6 +47936,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - Hello, I'm Nakamura.
     - I'm quite busy at the moment, so I'd prefer if you talk to me later.
@@ -47944,6 +47952,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - Are you done talking to some of your coworkers?
     - If so, you can take a break for now. If not, then you may continue.
@@ -48069,6 +48079,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - Hi! Are you here for your ID? I just finished making it.
     - Congratulations, by the way. See you later!
@@ -48084,6 +48096,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - Hey there.
     - I assume you're here for the blockchain setup?
@@ -48100,6 +48114,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - Hey there, welcome back.
     - You're now part of our blockchain community.
@@ -48117,6 +48133,8 @@ MonoBehaviour:
     virtualObjectiveDescription: 'Answer the question: "Which is the correct organizational
       structure of this company?".'
     setTeleportPosition: {x: 320, y: 2, z: 290}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - You will be performing a task, like what your manager said.
     - Good luck!
@@ -48131,6 +48149,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 1
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - You are correct!
     - The company's organizational structure resembles that of a blockchain.
@@ -48147,6 +48167,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - Welcome back! I suppose you're already done with the virtual activity.
     - You can check the announcement board to see all of your accomplished tasks.
@@ -48162,6 +48184,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue: []
     objectiveHash: 
     optionalKaching: 0
@@ -48174,6 +48198,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - I suppose you've already seen the announcement board.
     - That wraps up everything you have to do today.
@@ -48190,6 +48216,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue: []
     objectiveHash: 
     optionalKaching: 0
@@ -48237,6 +48265,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - Hi there! Nice to see you again.
     - Welcome to your onboarding seminar. Today I'm going to briefly discuss what
@@ -48258,6 +48288,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - Hey, let's get started!
     - First, I should introduce what is blockchain. Blockchain is a specific type
@@ -48286,6 +48318,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - Hello. I suppose you've learned something about mining and blockchain from
       Hanako.
@@ -48302,6 +48336,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - I see you're ready. Well, let's get started with proof-of-work.
     - Proof-of-work is basically a model. It is a consensus mechanism used to confirm
@@ -48329,6 +48365,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - Welcome back! I hope you learned something about our company's blockchain system.
       Your task is complete.
@@ -48346,6 +48384,8 @@ MonoBehaviour:
     virtualObjectiveDescription: Perform a bunch of prime factorizations to simulate
       mining and proof-of-work.
     setTeleportPosition: {x: 318, y: 76.5, z: 270}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - You will be performing a task, like what your manager said.
     - Good luck!
@@ -48360,6 +48400,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 1
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue: []
     objectiveHash: 
     optionalKaching: 0
@@ -48372,6 +48414,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - I hope you enjoyed that virtual activity!
     - Also, I don't really have any tasks for you, so consider the day as done. You
@@ -48389,6 +48433,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue: []
     objectiveHash: 
     optionalKaching: 0
@@ -48401,6 +48447,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue: []
     objectiveHash: 
     optionalKaching: 0
@@ -48443,13 +48491,16 @@ MonoBehaviour:
   objectiveList:
   - objectiveDesc: Buy some coffee from the vending machine.
     requiredInteractionObject: {fileID: 1903176719}
-    changedObject: {fileID: 0}
+    changedObject: {fileID: 2082913121}
     trueForDisappear: 0
     isDestination: 0
     isAccomplished: 0
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 1
+    displayImageWhileConvo: {fileID: 2800000, guid: 93038a3364f46e847b47585749d6c4b1,
+      type: 3}
     customDialogue:
     - (Each coffee is worth 4 Kaching)
     - (You buy 4 of them, one for each of your coworkers)
@@ -48464,6 +48515,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - (You give the coffee to Yuuichi.)
     - Oh wow. Thanks for this. Let me know if I can help you sometime.
@@ -48478,6 +48531,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - (You give the coffee to Megumi.)
     - Woow. Thank you! I was planning on getting this. Can you read minds or something?
@@ -48494,6 +48549,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - (You give the coffee to Satoshi.)
     - Hey, what's this? Oh, thanks.
@@ -48510,6 +48567,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - (You give the coffee to Hanako.)
     - Oh hi! What's that? Coffee? Thanks!
@@ -48528,6 +48587,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - Hey, welcome back.
     - I suppose you've done the task well. Hopefully that improves your relationship
@@ -48545,9 +48606,9 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
-    customDialogue:
-    - 
-    - 
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
+    customDialogue: []
     objectiveHash: 
     optionalKaching: 0
   - objectiveDesc: Exit the building.
@@ -48559,6 +48620,8 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - 
     - 
@@ -50553,8 +50616,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0.0057358346, y: 0.67478186, z: 0.005244661, w: 0.7379764}
-  m_LocalPosition: {x: 73.47324, y: 1.3614643, z: 78.98591}
+  m_LocalRotation: {x: -0.012921618, y: 0.66902685, z: 0.011634596, w: 0.7430349}
+  m_LocalPosition: {x: -1.7909174, y: 1.3301507, z: 74.85914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54127,6 +54190,7 @@ RectTransform:
   - {fileID: 1040145346}
   - {fileID: 924045220}
   - {fileID: 1894179542}
+  - {fileID: 2082913122}
   m_Father: {fileID: 882933156}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -62547,6 +62611,7 @@ RectTransform:
   - {fileID: 299332577}
   - {fileID: 1294667905}
   - {fileID: 1000146998}
+  - {fileID: 1312377416}
   m_Father: {fileID: 882933156}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -64015,7 +64080,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167162848}
-  m_LocalRotation: {x: -0.045257505, y: 0.6732805, z: 0.04135354, w: 0.7368413}
+  m_LocalRotation: {x: -0.055298895, y: 0.6669437, z: 0.04974634, w: 0.7413862}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -64217,7 +64282,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172054664}
-  m_LocalRotation: {x: -0.005735841, y: 0.6747818, z: 0.005244667, w: 0.73797643}
+  m_LocalRotation: {x: -0.012921619, y: 0.6690269, z: 0.011634597, w: 0.74303484}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -68764,6 +68829,78 @@ Transform:
   m_Father: {fileID: 1300011740}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1312377415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1312377416}
+  - component: {fileID: 1312377418}
+  - component: {fileID: 1312377417}
+  m_Layer: 5
+  m_Name: dialogueImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1312377416
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312377415}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1135579416}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 439}
+  m_SizeDelta: {x: 588.4576, y: 586.92737}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1312377417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312377415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &1312377418
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312377415}
+  m_CullTransparentMesh: 1
 --- !u!4 &1315919210 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4407548838867200, guid: 5bda03e6c90ba284f859d8e2c3a027fc,
@@ -88369,7 +88506,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1453330292}
   m_LocalRotation: {x: -0, y: -0.69866514, z: 0, w: -0.7154488}
-  m_LocalPosition: {x: 75.75, y: 0.08, z: 79.19}
+  m_LocalPosition: {x: 0.12, y: 0.08, z: 75.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2104356217}
@@ -88439,6 +88576,7 @@ MonoBehaviour:
   jumpHeight: 0.7
   currentInteractable: 
   dialogueProgressImage: {fileID: 1987192890}
+  displayedImageMidDialogue: {fileID: 1312377415}
   starterDialogue: 0
   uiHidden: 0
   gravityCheck: 0
@@ -88494,7 +88632,7 @@ MonoBehaviour:
       of blockchain.
     - The announcement board represents the public distributed ledger of blockchain.
       This is where all public transactions within the system are shown.
-    - <==============>
+    - 
     - Good luck on your second day, intern!
     afterDayDialogueImage:
     - line: Congratulations! You've survived your first day.
@@ -88519,6 +88657,12 @@ MonoBehaviour:
         is synchronized and accessible across different sites and geographies by
         multiple participants.
       image: {fileID: 2800000, guid: 0083510da653b9d4dae8ea28df3c4ab4, type: 3}
+    - line: Additionally, you've performed a simple minigame that tried to test your
+        knowledge of the structure of blockchain.
+      image: {fileID: 2800000, guid: d4290a052c78fcb4da895c546b43b886, type: 3}
+    - line: Each node is connected to one another. There is no hierarchy and everyone
+        is equal.
+      image: {fileID: 2800000, guid: d4290a052c78fcb4da895c546b43b886, type: 3}
     - line: That about wraps it up for this day. Good luck on your next day, intern!
       image: {fileID: 2800000, guid: beb7ea715a75af84484c3cbeb2dad4e6, type: 3}
   - dayQuestListArray:
@@ -88544,6 +88688,12 @@ MonoBehaviour:
       image: {fileID: 2800000, guid: 1df75ad482e2b75489f8b556a6879ab0, type: 3}
     - line: Proof-of-work in this game can be seen through the announcement board.
       image: {fileID: 2800000, guid: 74a942aff0a99cb418ec14bbc5f90d6c, type: 3}
+    - line: Additionally, you were tasked to play a minigame that intended to simulate
+        mining and proof of work.
+      image: {fileID: 2800000, guid: 5be5519f281b53448ab040952ca2f491, type: 3}
+    - line: By making you perform prime factorization, it simulates the calculation
+        for the nonce as proof-of-work.
+      image: {fileID: 2800000, guid: 5be5519f281b53448ab040952ca2f491, type: 3}
     - line: That about wraps it up for this day. Good luck on your next day, intern!
       image: {fileID: 2800000, guid: beb7ea715a75af84484c3cbeb2dad4e6, type: 3}
   - dayQuestListArray:
@@ -88552,7 +88702,22 @@ MonoBehaviour:
     afterDayDialogueImage:
     - line: Congratulations! You've survived your third day.
       image: {fileID: 2800000, guid: c74346050e0ad8448b61505f0fd63c73, type: 3}
-    - line: <Content to follow>
+    - line: You didn't do much today, but you did see a commonly used concept related
+        to blockchain.
+      image: {fileID: 2800000, guid: c74346050e0ad8448b61505f0fd63c73, type: 3}
+    - line: Cryptocurrency is undoubtedly one of the most recognizable aspects of
+        blockchain.
+      image: {fileID: 2800000, guid: dfd8a9ff3c317bc44b286f5b489a1dde, type: 3}
+    - line: Today, the quest was to demonstrate the general use of cryptocurrency
+        in buying goods, which is pretty much the same as normal currency.
+      image: {fileID: 2800000, guid: dfd8a9ff3c317bc44b286f5b489a1dde, type: 3}
+    - line: However, the only difference is that everyone will be able to see and
+        verify that a transaction has taken place, specifically in the public distributed
+        ledger.
+      image: {fileID: 2800000, guid: 74a942aff0a99cb418ec14bbc5f90d6c, type: 3}
+    - line: Here, you can see that such transaction has been recorded.
+      image: {fileID: 2800000, guid: 1722c12d5172f334a94dbd6a165657d1, type: 3}
+    - line: That's all for today!
       image: {fileID: 2800000, guid: beb7ea715a75af84484c3cbeb2dad4e6, type: 3}
 --- !u!114 &1453330297
 MonoBehaviour:
@@ -88583,18 +88748,22 @@ MonoBehaviour:
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue: []
     objectiveHash: 
     optionalKaching: 0
   - objectiveDesc: Talk to the manager
     requiredInteractionObject: {fileID: 905284606}
     changedObject: {fileID: 0}
-    trueForDisappear: 1
+    trueForDisappear: 0
     isDestination: 0
     isAccomplished: 0
     isVirtualPuzzleObjective: 0
     virtualObjectiveDescription: 
     setTeleportPosition: {x: 0, y: 0, z: 0}
+    supplyOwnImageBool: 0
+    displayImageWhileConvo: {fileID: 0}
     customDialogue:
     - Hi! Welcome to the company. I'm your manager. I hope we get along.
     - If you have any questions, feel free to ask me.
@@ -92761,7 +92930,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591106472}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.729782, y: 2.4637072, z: 15.94767}
+  m_LocalPosition: {x: -95.35978, y: 2.4637072, z: 11.817665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 736281377}
@@ -94806,8 +94975,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643155529}
-  m_LocalRotation: {x: -0.0057358425, y: 0.67478186, z: 0.005244667, w: 0.7379764}
-  m_LocalPosition: {x: 73.47324, y: 1.3614643, z: 78.98591}
+  m_LocalRotation: {x: -0.012921618, y: 0.66902685, z: 0.011634596, w: 0.7430349}
+  m_LocalPosition: {x: -1.7909174, y: 1.3301507, z: 74.85914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -102355,6 +102524,68 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
+--- !u!1 &1699335433
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1699335436}
+  - component: {fileID: 1699335435}
+  - component: {fileID: 1699335434}
+  m_Layer: 0
+  m_Name: Post-process Volume (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1699335434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699335433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 3a4a8c59dbe47f842a2f64ef837d9ac2, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
+--- !u!65 &1699335435
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699335433}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1699335436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699335433}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 189.08443, y: 12.388571, z: 7.21278}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 44
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1700904365
 GameObject:
   m_ObjectHideFlags: 0
@@ -105248,7 +105479,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1763318981}
-  m_LocalRotation: {x: -0.005735841, y: 0.6747818, z: 0.005244667, w: 0.73797643}
+  m_LocalRotation: {x: -0.012921619, y: 0.6690269, z: 0.011634597, w: 0.74303484}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -113251,7 +113482,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1989798550}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.729782, y: 2.4637072, z: 15.94767}
+  m_LocalPosition: {x: -95.35978, y: 2.4637072, z: 11.817665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1763318982}
@@ -118159,6 +118390,145 @@ Transform:
   m_Father: {fileID: 198036689}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2082913121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2082913122}
+  - component: {fileID: 2082913124}
+  - component: {fileID: 2082913123}
+  m_Layer: 5
+  m_Name: fakekekw
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &2082913122
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082913121}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1039430459}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 420, y: -384.79388}
+  m_SizeDelta: {x: 1560, y: 368.413}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2082913123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082913121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: '// COMPLETED CRYPTOCURRENCY TRANSACTIONS
+
+
+    > Unity-chan bought 4x
+    KOPIKO for 16 Kachings -  0xAB392BF'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: ce5124801eeed264ab61b48004875ce5, type: 2}
+  m_sharedMaterial: {fileID: 5251992243703041582, guid: ce5124801eeed264ab61b48004875ce5,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 32.8
+  m_fontSizeBase: 32.8
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: -1.3
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 4
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 1
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: -0.24055475, y: 0, z: 576.85895, w: -122.66875}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &2082913124
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082913121}
+  m_CullTransparentMesh: 0
 --- !u!1 &2089680090
 GameObject:
   m_ObjectHideFlags: 0
@@ -120114,7 +120484,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2128583709
 MonoBehaviour:
   m_ObjectHideFlags: 0

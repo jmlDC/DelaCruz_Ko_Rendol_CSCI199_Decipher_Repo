@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class MainMenu : MonoBehaviour
 
         player.GetComponent<UnityTPS>().introUI.SetActive(true);
         player.GetComponent<UnityTPS>().setFocusToUIIntroMode();
+
+        // SceneManager.LoadScene("ConclusionScene");
         
         
     }

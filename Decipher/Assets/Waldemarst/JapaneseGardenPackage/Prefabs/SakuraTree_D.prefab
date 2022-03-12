@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5483039503417428075}
   - component: {fileID: 1245003272932113651}
-  - component: {fileID: 6892637270116218983}
+  - component: {fileID: 7042478752708643669}
   m_Layer: 0
   m_Name: SakuraTree_D
   m_TagString: Untagged
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2683874816178851636}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4665325013155613217}
@@ -49,11 +49,11 @@ LODGroup:
   m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.6
+  - screenRelativeHeight: 0.75265294
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 4367531363361988754}
-  - screenRelativeHeight: 0.20000002
+  - screenRelativeHeight: 0.29608494
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5822591590547123484}
@@ -62,7 +62,7 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4035775625688998131}
   m_Enabled: 1
---- !u!136 &6892637270116218983
+--- !u!136 &7042478752708643669
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,9 +73,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 11
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 5.02, z: 0}
 --- !u!1 &5348420237535000456
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +158,6 @@ GameObject:
   - component: {fileID: 4665325013155613217}
   - component: {fileID: 1671246625551753817}
   - component: {fileID: 4367531363361988754}
-  - component: {fileID: 3917822073845400940}
   m_Layer: 0
   m_Name: LOD_0
   m_TagString: Untagged
@@ -228,20 +227,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &3917822073845400940
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5462536541359242914}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.62
-  m_Height: 13.12
-  m_Direction: 1
-  m_Center: {x: -0.01, y: 6.7968135, z: 0.27}
 --- !u!1 &7441219191427709991
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,7 +411,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Cutoff: 0.35
+    - _Cutoff: 0.5
     - _WindQuality: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

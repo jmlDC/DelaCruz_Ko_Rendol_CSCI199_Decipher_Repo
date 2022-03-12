@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 [System.Serializable]
@@ -24,6 +25,13 @@ public class Objective
     public string virtualObjectiveDescription;
 
     public Vector3 setTeleportPosition;
+
+    [Header("Display Image")]
+    
+    public bool supplyOwnImageBool;
+    public Texture displayImageWhileConvo;
+
+
 
     [Header("Other")]
 

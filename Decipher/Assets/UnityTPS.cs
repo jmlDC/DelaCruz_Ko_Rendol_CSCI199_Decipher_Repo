@@ -6,6 +6,7 @@ using System;
 using Cinemachine;
 using System.Linq;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class UnityTPS : MonoBehaviour
@@ -91,6 +92,8 @@ public class UnityTPS : MonoBehaviour
     [SerializeField] public string currentInteractable;
 
     public GameObject dialogueProgressImage;
+
+    public GameObject displayedImageMidDialogue;
 
     public bool starterDialogue;
 
@@ -384,15 +387,23 @@ public class UnityTPS : MonoBehaviour
                     }
                     else if (afterDayDialogueCounter >= afterDayMaxDialogueCounter)
                     {
-                        allowMove = true;
+                    
+                        if (day+1 > gameObject.GetComponent<dayQuestTracker>().listQuestDays.Length){
+                            SceneManager.LoadScene("ConclusionScene");
+                            allowMove = false;
+                            
+                        } else {
+                            allowMove = true;
+                        }
                         fadeUI.SetActive(false);
                         dayChangeState = false;
-
-
+                        
 
                         afterDayDialogueCounter = 0;
                         day += 1;
                         completedQuestsDay.Clear();
+
+
 
                     }
 
@@ -479,6 +490,18 @@ public class UnityTPS : MonoBehaviour
 
                         if (currentGameObject.GetComponent<Dialogue>().returnDialogue().Length > dialogueCounter)
                         {
+                            try
+                            {
+                                if (currentQuest.objectiveList[currentQuest.objectiveCounter].supplyOwnImageBool && currentQuest.objectiveList[currentQuest.objectiveCounter].requiredInteractionObject == currentGameObject)
+                                {
+                                    displayedImageMidDialogue.GetComponent<RawImage>().color = new Color(255, 255, 255, 255);
+
+                                    displayedImageMidDialogue.GetComponent<RawImage>().texture = currentQuest.objectiveList[currentQuest.objectiveCounter].displayImageWhileConvo;
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                            }
 
                             dialogueTimer = (float)(currentGameObject.GetComponent<Dialogue>().returnDialogue()[dialogueCounter].Length / 28);
                             if (dialogueTimer < 1)
@@ -497,12 +520,17 @@ public class UnityTPS : MonoBehaviour
 
                             try
                             {
+                                if (currentQuest.objectiveList[currentQuest.objectiveCounter].supplyOwnImageBool)
+                                {
+                                    displayedImageMidDialogue.GetComponent<RawImage>().texture = null;
+                                    displayedImageMidDialogue.GetComponent<RawImage>().color = new Color(0, 0, 0, 0);
+                                }
                                 Debug.Log(currentQuest.objectiveList[currentQuest.objectiveCounter].requiredInteractionObject.name + " | " + currentQuest.objectiveList[currentQuest.objectiveCounter].isVirtualPuzzleObjective);
                             }
                             catch (Exception e)
                             {
                             }
-                            
+
                             try
                             {
                                 if (currentGameObject.GetComponent<TeleporterScript>())

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5752105476961817693}
   - component: {fileID: 8976102599066158350}
-  - component: {fileID: 7175734557860263490}
+  - component: {fileID: -3193365883388766599}
   m_Layer: 0
   m_Name: SakuraTree_F
   m_TagString: Untagged
@@ -49,11 +49,11 @@ LODGroup:
   m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.6
+  - screenRelativeHeight: 0.7488418
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 4439980423527718968}
-  - screenRelativeHeight: 0.20000002
+  - screenRelativeHeight: 0.30331594
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 1789478459948429877}
@@ -62,7 +62,7 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2682955983252453909}
   m_Enabled: 1
---- !u!136 &7175734557860263490
+--- !u!136 &-3193365883388766599
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,10 +72,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.46
-  m_Height: 7.57
+  m_Radius: 0.5
+  m_Height: 6.77
   m_Direction: 1
-  m_Center: {x: 0, y: 3.39, z: 0}
+  m_Center: {x: 0, y: 3.16, z: 0}
 --- !u!1 &6320093931236580072
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,7 +411,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Cutoff: 0.35
+    - _Cutoff: 0.5
     - _WindQuality: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
