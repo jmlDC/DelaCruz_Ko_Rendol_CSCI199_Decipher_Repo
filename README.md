@@ -1,4 +1,4 @@
-# Thesis-Decipher-Unity-Repo
+# DelaCruz_Ko_Rendol_CSCI199_Decipher_Repo
 
 Unity game repository for the study titled Decipher: A Game-Based Learning of Blockchain Technology.
 
