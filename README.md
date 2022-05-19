@@ -4,7 +4,7 @@ Unity game repository for the study titled Decipher: A Game-Based Learning of Bl
 
 ## How do I use this repo?
 
-Make sure your Unity version is **2019.4.20f1**. No exceptions here. Newer versions cause incompatibilities.
+Make sure your Unity version is **2021.1.20f1**. No exceptions here. Newer versions cause incompatibilities.
 
 Clone the repo.
 
